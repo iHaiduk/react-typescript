@@ -1,0 +1,72 @@
+{
+  "compilerOptions": {
+    "alwaysStrict": true,
+    "outDir": "./dist/",
+    "sourceMap": true,
+    "noImplicitAny": true,
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "target": "es2015",
+    "importHelpers": true,
+    "jsx": "react",
+    "baseUrl": "./",
+    "removeComments": false,
+    "allowUnusedLabels": false,
+    "noImplicitThis": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": false,
+    "paths": {
+      "_actions": [
+        "./store/actions/index"
+      ],
+      "_blocks/*": [
+        "./view/block/*"
+      ],
+      "_config": [
+        "./server/config"
+      ],
+      "_components/*": [
+        "./view/components/*"
+      ],
+      "_containers/*": [
+        "./view/containers/*"
+      ],
+      "_models": [
+        "./server/db/models"
+      ],
+      "_reducers": [
+        "./store/reducers/index"
+      ],
+      "_route": [
+        "./route/index"
+      ],
+      "_store": [
+        "./store/index"
+      ],
+      "_stylesLoad/*": [
+        "./styles/*"
+      ],
+      "_style": [
+        "./styles/index"
+      ]
+    },
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true
+  },
+  "include": [
+    "./server/**/*",
+    "./route/**/*",
+    "./store/**/*",
+    "./styles/**/*",
+    "./view/**/*"
+  ],
+  "awesomeTypescriptLoaderOptions": {
+    "forkChecker": true,
+    "useWebpackText": true,
+    "useBabel": true,
+    "useCache": true,
+    "useTranspileModule": true
+  },
+  "compileOnSave": false,
+  "buildOnSave": false
+}

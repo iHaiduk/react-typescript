@@ -1,0 +1,6 @@
+@import "~bemify";
+
+@include block('header') {
+  color: red;
+  background-image: linear-gradient(180deg, rgba(100, 50, 135, 0.8) 0%, #050505 100%);
+}
