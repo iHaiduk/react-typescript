@@ -1,3 +1,8 @@
 {
-  "extends": ["tslint:latest", "tslint-react"]
+  "extends": ["tslint:latest", "tslint-react"],
+  "rules": {
+    "max-line-length": [true, 150],
+    "no-console": [true, "debug", "info", "log", "time", "timeEnd", "trace"],
+    "no-var-requires": false
+  }
 }

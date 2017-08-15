@@ -10,7 +10,7 @@ interface IApp {
 }
 let AppComponent: any;
 
-if(process.env.NODE_ENV === "production") {
+if (process.env.NODE_ENV === "production") {
 
     const App: React.StatelessComponent<IApp> = (props) => {
         return React.createElement(

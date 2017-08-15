@@ -9,3 +9,8 @@ yarn.lock
 # Build
 dist/bundle.js*
 dist/main.css*
+/.awcache/
+.awcache/
+.idea/
+/dist/
+dist/

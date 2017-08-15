@@ -1,1 +1,158 @@
-react-typescript
+# React TypeScript Isomorphic Starter
+This system was created for start any project on NodeJs and React.
+### Built using
+#### For styles
+- [Webpack](https://webpack.github.io) v3.5.4
+- [SCSS](http://sass-lang.com) + [sass-loader](https://github.com/webpack-contrib/sass-loader) v6.0.6
+- [Bemify](https://github.com/franzheidl/bemify) v0.1.2
+- [normalize-scss](https://github.com/JohnAlbin/normalize-scss) v7.0.0
+- [autoprefixer](https://github.com/postcss/autoprefixer) v7.1.2
+###### Environment production
+- [cssnano](http://cssnano.co) v3.10.0
+---------------
+#### For frontend side
+- [TypeScript](https://www.typescriptlang.org) v2.5.0-dev.20170803 + [awesome-typescript-loader](https://github.com/s-panferov/awesome-typescript-loader) v3.2.3
+- [React](https://facebook.github.io/react/) v15.6.1
+- [redux](http://redux.js.org) v3.7.2
+- [Webpack](https://webpack.github.io) v3.5.4
+###### Other
+- [classnames](https://github.com/JedWatson/classnames) v2.2.5
+- [socket.io](https://socket.io) v2.0.3
+- [React-redux](https://github.com/reactjs/react-redux) v5.0.6
+- [React-router](https://github.com/ReactTraining/react-router) v4.1.2
+- [React-router-redux](https://github.com/ReactTraining/react-router/tree/master/packages/react-router-redux) v5.0.0-alpha.6
+- [react-helmet](https://github.com/nfl/react-helmet) v5.1.3
+###### Babel
+- [babel-loader](https://github.com/babel/babel-loader) v7.1.1
+- [babel-plugin-transform-runtime](https://babeljs.io/docs/plugins/transform-runtime/) v6.23.0
+- [babel-preset-es2015](https://babeljs.io/docs/plugins/preset-es2015/) v6.24.1
+- [babel-preset-stage-0](https://babeljs.io/docs/plugins/preset-stage-0/) v6.24.1
+- [babel-plugin-dynamic-import-webpack](https://github.com/airbnb/babel-plugin-dynamic-import-webpack) v1.0.1
+---------------
+#### For backend side
+- [TypeScript](https://www.typescriptlang.org) v2.5.0-dev.20170803
+- [React](https://facebook.github.io/react/) v15.6.1
+- [Koa](http://koajs.com) v2.3.0
+- [koa-router](https://github.com/alexmingoia/koa-router) v7.2.1
+
+###### DataBase and Memory
+- [mongoose](http://mongoosejs.com) v4.11.7
+- [moize](https://github.com/planttheidea/moize) v3.4.0
+
+###### Users
+- [bcryptjs](https://github.com/dcodeIO/bcrypt.js) v2.4.3
+- [jsonwebtoken](https://jwt.io/) v7.4.2
+
+###### Logging
+- [pino](http://getpino.io/) v4.7.1
+
+###### Other
+- [classnames](https://github.com/JedWatson/classnames) v2.2.5
+- [socket.io](https://socket.io) v2.0.3
+- [redux](http://redux.js.org) v3.7.2
+- [React-redux](https://github.com/reactjs/react-redux) v5.0.6
+- [React-router](https://github.com/ReactTraining/react-router) v4.1.2
+- [React-router-redux](https://github.com/ReactTraining/react-router/tree/master/packages/react-router-redux) v5.0.0-alpha.6
+- [react-helmet](https://github.com/nfl/react-helmet) v5.1.3
+
+## Getting Started
+Requirement:
+
+- NodeJS 8+
+- MongoDB 3.4+
+
+Install dependencies:
+
+```
+$ yarn install
+```
+
+```
+$ npm install
+```
+
+## Running development server
+Run webpack watcher backend changes:
+
+```
+npm run backend-watch
+```
+Run webpack watcher frontend changes (for assets) and run dev-server:
+
+```
+npm run dev-server
+```
+Run backend side
+```
+gulp backend
+```
+Visit [http://localhost:3000/](http://localhost:3000/).
+
+## Running production server
+This will build the assets for you on the first run. For subsequent starts, you should run:
+
+```
+npm run production
+```
+Run server:
+```
+npm run server
+```
+Visit [http://localhost:1337/](http://localhost:1337/).
+
+## Linting Test
+##### Style
+```
+$ gem install scss_lint
+```
+```
+$ npm run scss-lint
+```
+##### TypeScript
+```
+$ npm run lint-typescript
+```
+##### All
+```
+$ npm run lint
+```
+
+##Task lists
+- [x] Create isomorphic application
+- [x] Connect React & Redux & Router
+- [x] Add database - MongoDB
+- [ ] Add Redis.io v4+
+- [ ] Add ServiceWorker and AppCache
+- [ ] SVG sprite generator
+- [ ] Tinypng for images
+- [ ] Authorization Token System
+- [ ] Update React to v16
+- [ ] Add testing
+
+Folder Structure Conventions
+============================ 
+    .
+    ├── .awcache                # Cached build files
+    ├── client                  # Client load application
+    ├── dist                    # Compiled files
+    ├── route                   # Files for routing application
+    ├── server                  # Server load applicaton
+    ├── store                   # Redux store
+    ├── styles                  # Application styles
+    ├── view                    # React view components
+    ├── webpack                 # Config for compilation
+    ├── tools                   # Tools and utilities
+    ├── .gitignore
+    ├── .scss-lint.yml
+    ├── gulpfile.js
+    ├── package.json
+    ├── README.md
+    ├── tsconfig.json
+    └── tslint.json
+    
+Folder Structure Compiled Files
+============================ 
+    .
+    └── dist
+        ├── public               # Assets folder
+        └── dist                 # Server application

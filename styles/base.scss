@@ -1,9 +1,10 @@
-@import "~normalize-scss";
+@import '~normalize-scss';
+@import 'variables/colors';
 
 @include normalize();
 
 body {
-  color: white;
-  background: black;
+  background: $background-color;
+  color: $text-white;
   font-style: italic;
 }
