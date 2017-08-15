@@ -7,8 +7,7 @@ This system was created for start any project on NodeJs and React.
 - [Bemify](https://github.com/franzheidl/bemify) v0.1.2
 - [normalize-scss](https://github.com/JohnAlbin/normalize-scss) v7.0.0
 - [autoprefixer](https://github.com/postcss/autoprefixer) v7.1.2
-###### Environment production
-- [cssnano](http://cssnano.co) v3.10.0
+- [cssnano](http://cssnano.co) v3.10.0 (only Environment production)
 ---------------
 #### For frontend side
 - [TypeScript](https://www.typescriptlang.org) v2.5.0-dev.20170803 + [awesome-typescript-loader](https://github.com/s-panferov/awesome-typescript-loader) v3.2.3
@@ -127,6 +126,7 @@ $ npm run lint
 - [ ] Tinypng for images
 - [ ] Authorization Token System
 - [ ] Update React to v16
+- [ ] Add pipelines
 - [ ] Add testing
 
 Folder Structure Conventions
