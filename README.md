@@ -38,7 +38,7 @@ This system was created for start any project on NodeJs and React.
 - [mongoose](http://mongoosejs.com) v4.11.7
 - [moize](https://github.com/planttheidea/moize) v3.4.0
 
-###### Users
+###### For user system
 - [bcryptjs](https://github.com/dcodeIO/bcrypt.js) v2.4.3
 - [jsonwebtoken](https://jwt.io/) v7.4.2
 
