@@ -2,7 +2,7 @@
 This system was created for start any project on NodeJs and React.
 ### Built using
 #### For styles
-- [Webpack](https://webpack.github.io) v3.5.4
+- [Webpack](https://webpack.github.io) v3.5.5
 - [SCSS](http://sass-lang.com) + [sass-loader](https://github.com/webpack-contrib/sass-loader) v6.0.6
 - [Bemify](https://github.com/franzheidl/bemify) v0.1.2
 - [normalize-scss](https://github.com/JohnAlbin/normalize-scss) v7.0.0
@@ -13,7 +13,7 @@ This system was created for start any project on NodeJs and React.
 - [TypeScript](https://www.typescriptlang.org) v2.5.0-dev.20170803 + [awesome-typescript-loader](https://github.com/s-panferov/awesome-typescript-loader) v3.2.3
 - [React](https://facebook.github.io/react/) v15.6.1
 - [redux](http://redux.js.org) v3.7.2
-- [Webpack](https://webpack.github.io) v3.5.4
+- [Webpack](https://webpack.github.io) v3.5.5
 ###### Other
 - [classnames](https://github.com/JedWatson/classnames) v2.2.5
 - [socket.io](https://socket.io) v2.0.3
@@ -46,6 +46,7 @@ This system was created for start any project on NodeJs and React.
 - [pino](http://getpino.io/) v4.7.1
 
 ###### Other
+- [ioredis](https://github.com/luin/ioredis) v3.1.4
 - [classnames](https://github.com/JedWatson/classnames) v2.2.5
 - [socket.io](https://socket.io) v2.0.3
 - [redux](http://redux.js.org) v3.7.2
@@ -120,8 +121,10 @@ $ npm run lint
 - [x] Create isomorphic application
 - [x] Connect React & Redux & Router
 - [x] Add database - MongoDB
-- [ ] Add Redis.io v4+
+- [x] Add Redis.io v4+
+- [x] Connect socket.io with Redis
 - [ ] Add ServiceWorker and AppCache
+- [ ] PM2 Start server
 - [ ] SVG sprite generator
 - [ ] Tinypng for images
 - [ ] Authorization Token System

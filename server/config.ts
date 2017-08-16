@@ -28,6 +28,12 @@ interface IConfig {
         development: string,
         production: string,
     };
+    redis: {
+        family?: number;
+        password?: string;
+        port: number;
+        host: string;
+    } | string;
 }
 
 export const database = {
@@ -42,6 +48,12 @@ export const database = {
     production: "mongodb://localhost/book",
 };
 
+export const redisConfig = {
+    family: 4,
+    host: "127.0.0.1",   // Redis host
+    port: 6379,          // Redis port
+};
+
 const config: IConfig = {
     database,
     hostname: "0.0.0.0",
@@ -49,6 +61,7 @@ const config: IConfig = {
     logSafe: true,
     port: process.env.PORT && parseInt(String(process.env.PORT), 10) || 1337,
     pretty,
+    redis: redisConfig,
 };
 
 export const logConfig = {level: config.logLevel, safe: true};
