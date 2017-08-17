@@ -28,8 +28,9 @@ export const HTML = ({html = "", context = {}}: IHTMLRender): React.ReactElement
         <body>
         <div id="application" dangerouslySetInnerHTML={{ __html: html }} />
         <script dangerouslySetInnerHTML={{ __html: `window.__initialState__=${serialize(context)};` }}/>
-        <script src="vendor.js" type="text/javascript"/>
-        <script src="bundle.js" type="text/javascript"/>
+        <script src="/vendor.js" type="text/javascript"/>
+        <script src="/style.js" type="text/javascript"/>
+        <script src="/bundle.js" type="text/javascript"/>
         </body>
         </html>);
 };

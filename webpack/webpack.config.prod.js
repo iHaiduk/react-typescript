@@ -27,19 +27,23 @@ const entry = {
         'immutable',
         'classnames',
         "socket.io-client"
-    ]
+    ],
+    style: [
+        './styles/index.ts',
+    ],
 };
 
 fs.readdirSync(resolve(__dirname, "..", "styles")).forEach(file => {
     if(/scss$/i.test(file)) {
         const name = file.replace(/\.scss$/i, '');
         entry[name] = resolve(__dirname, '../styles', name + '.scss');
+        // entry.style.push('./styles/' + name + '.tsx');
     }
 });
 
 module.exports = {
     // To enhance the debugging process. More info: https://webpack.js.org/configuration/devtool/
-    devtool: 'sourcemap',
+    devtool: false,
     target: 'web',
     entry: entry,
     output: {
@@ -50,7 +54,7 @@ module.exports = {
         filename: '[name].js?[hash]', // string
         // the filename template for entry chunks
         sourceMapFilename: '[name].js.map?[hash]',
-        chunkFilename: '[name].[hash:7].js',
+        chunkFilename: '[name].[hash:4].js',
         // libraryTarget: 'umd'
         jsonpFunction: '$'
     },
@@ -144,7 +148,7 @@ module.exports = {
                 test: /\.scss$/,
                 use:
                     ExtractTextPlugin.extract({
-                        fallback: "style-loader",
+                        fallback: "style-loader?sourceMap=false",
                         use: [
                             {
                                 loader: "css-loader", options: {
@@ -205,11 +209,11 @@ module.exports = {
             {
                 test: /\.ts(x?)$/,
                 use: [
-                    {loader: 'react-hot-loader/webpack'},
                     // {
                     //     loader: 'babel-loader',
                     //     query: {
-                    //         plugins: ['dynamic-import-webpack']
+                    //         presets: ["react-optimize", "stage-0"],
+                    //         plugins: ['transform-react-remove-prop-types']
                     //     }
                     // },
                     // {

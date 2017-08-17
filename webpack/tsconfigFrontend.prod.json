@@ -44,7 +44,11 @@
     "useWebpackText": false,
     "useCache": true,
     "useTranspileModule": true,
-    "silent": true
+    "silent": true,
+    "useBabel": true,
+    "babelOptions": {
+      "presets": ["react-optimize", "stage-0"]
+    },
   },
   "compileOnSave": false,
   "buildOnSave": false

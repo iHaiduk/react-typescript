@@ -14,3 +14,4 @@ dist/main.css*
 .idea/
 /dist/
 dist/
+tsconfig.json

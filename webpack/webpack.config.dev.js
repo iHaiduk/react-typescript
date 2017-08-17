@@ -37,7 +37,12 @@ const entry = {
         'immutable',
         'classnames',
         "socket.io-client"
-    ]
+    ],
+    style: [
+        './styles/index.ts',
+        './styles/block.tsx',
+        './styles/section.tsx',
+    ],
 };
 
 fs.readdirSync(resolve(__dirname, "..", "styles")).forEach(file => {
@@ -197,13 +202,13 @@ module.exports = {
                 enforce: 'pre',
                 test: /\.js$/,
                 loader: 'source-map-loader',
-                exclude: '/node_modules/'
+                exclude: /node_modules|styles/,
             },
             {
                 enforce: 'pre',
                 test: /\.tsx?$/,
                 use: "source-map-loader",
-                exclude: '/node_modules/'
+                exclude: /node_modules|styles/,
             },
             // All files with a '.ts' or '.tsx' extension will be handled by 'ts-loader'.
             {
@@ -213,7 +218,7 @@ module.exports = {
                     // {
                     //     loader: 'babel-loader',
                     //     query: {
-                    //         plugins: ['dynamic-import-webpack']
+                    //         presets: ['es2015', 'stage-0']
                     //     }
                     // },
                     // {
