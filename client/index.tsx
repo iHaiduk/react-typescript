@@ -1,5 +1,6 @@
 import App from "_route";
 import store, {history} from "_store";
+import * as OfflinePluginRuntime from "offline-plugin/runtime";
 import * as React from "react";
 import {render} from "react-dom";
 import {AppContainer} from "react-hot-loader";
@@ -7,6 +8,8 @@ import {Provider} from "react-redux";
 import {LOCATION_CHANGE} from "../store/reducers/routing";
 
 import "./socket";
+
+OfflinePluginRuntime.install();
 
 const renderApplication = (Component: any) => {
     render(

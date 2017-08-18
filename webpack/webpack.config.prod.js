@@ -5,7 +5,8 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const WebpackErrorNotificationPlugin = require('webpack-error-notification');
 const BellOnBundlerErrorPlugin = require('bell-on-bundler-error-plugin');
-const { TsConfigPathsPlugin } = require('awesome-typescript-loader');
+const OfflinePlugin = require('offline-plugin');
+const ManifestPlugin = require('webpack-manifest-plugin');
 
 const entry = {
     bundle: './client/index.tsx',
@@ -33,13 +34,18 @@ const entry = {
     ],
 };
 
+const excludes_offline = ['style/style.css*', 'style.css*'];
+
 fs.readdirSync(resolve(__dirname, "..", "styles")).forEach(file => {
     if(/scss$/i.test(file)) {
         const name = file.replace(/\.scss$/i, '');
         entry[name] = resolve(__dirname, '../styles', name + '.scss');
         // entry.style.push('./styles/' + name + '.tsx');
+        excludes_offline.push(name + ".js*")
     }
 });
+
+console.log(excludes_offline)
 
 module.exports = {
     // To enhance the debugging process. More info: https://webpack.js.org/configuration/devtool/
@@ -136,11 +142,21 @@ module.exports = {
         new webpack.optimize.CommonsChunkPlugin({
             name: 'vendor',
             minChunks: Infinity,
-            filename: 'vendor.js'
+            filename: 'vendor.js?[hash]'
         }),
         new WebpackErrorNotificationPlugin(),
         new BellOnBundlerErrorPlugin(),
-        new ExtractTextPlugin("../public/style/[name].css")
+        new ExtractTextPlugin("style/[name].css?[hash]"),
+        new OfflinePlugin({
+            excludes: excludes_offline,
+            responseStrategy: 'network-first',
+            ServiceWorker: {
+                minify: true
+            }
+        }),
+        new ManifestPlugin({
+            fileName: "../server/manifest.json"
+        })
     ],
     module: {
         rules: [

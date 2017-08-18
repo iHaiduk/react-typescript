@@ -6,6 +6,7 @@ declare interface IBlock {
 }
 
 export const block: IBlock = (require as any)("./block.scss");
+const ASSETS: any = process.env.BROWSER ? (window as any).ASSETS : process.env.ASSETS;
 
 export const blockStyle = (Elem: any): any => {
 
@@ -16,7 +17,7 @@ export const blockStyle = (Elem: any): any => {
                 <Elem>
                     {this.props.children}
                     <Helmet>
-                        <link href="/style/block.css" media="all" rel="stylesheet" />
+                        <link href={`/${ASSETS["block.css"] || "style/block.css"}`} media="all" rel="stylesheet" />
                     </Helmet>
                 </Elem>
             );

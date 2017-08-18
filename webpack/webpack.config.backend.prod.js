@@ -1,5 +1,5 @@
 const fs = require('fs');
-const resolve = require('path').resolve;
+const {resolve} = require('path');
 const webpack = require('webpack');
 const nodeExternals = require('webpack-node-externals');
 const WebpackErrorNotificationPlugin = require('webpack-error-notification');
@@ -19,6 +19,8 @@ fs.readdirSync(resolve(__dirname, "..", "styles")).forEach(file => {
         entry[name] = resolve(__dirname, '../styles', name + '.scss');
     }
 });
+
+const assets = fs.readFileSync(resolve(__dirname, "..", "dist", "server", "manifest.json"), "utf-8");
 
 module.exports = {
     // To enhance the debugging process. More info: https://webpack.js.org/configuration/devtool/
@@ -80,10 +82,11 @@ module.exports = {
                 BROWSER: JSON.stringify(false),
                 NODE_ENV: JSON.stringify('production'),
                 WEB: JSON.stringify('production'),
+                ASSETS: assets
             }
         }),
 
-        new ExtractTextPlugin("../public/style/[name].css"),
+        new ExtractTextPlugin("style/[name].css"),
         new BabiliPlugin()
     ],
     module: {

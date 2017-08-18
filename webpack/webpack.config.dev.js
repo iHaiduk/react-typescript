@@ -5,6 +5,7 @@ const DashboardPlugin = require('webpack-dashboard/plugin');
 const WebpackErrorNotificationPlugin = require('webpack-error-notification');
 const BellOnBundlerErrorPlugin = require('bell-on-bundler-error-plugin');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const OfflinePlugin = require('offline-plugin');
 
 const entry = {
     bundle: [
@@ -148,7 +149,8 @@ module.exports = {
         // do not emit compiled assets that include errors
         new WebpackErrorNotificationPlugin(),
         new BellOnBundlerErrorPlugin(),
-        new ExtractTextPlugin("../public/style/[name].css")
+        new ExtractTextPlugin("style/[name].css"),
+        new OfflinePlugin()
     ],
     module: {
         // loaders -> rules in webpack 2

@@ -22,7 +22,9 @@ gulp.task('backend', function (callback) {
             script: './dist/server/index.js',
             ext: 'js css jpg png svg',
             watch: ['dist'],
-            env: {'NODE_ENV': 'development'},
+            env: {
+                'NODE_ENV': 'development'
+            },
             ignore: [
                 'node_modules/'
             ]
@@ -62,9 +64,10 @@ gulp.task('prebuild', function (callback) {
 
 gulp.task('cleanServer', ['prebuild'], function () {
     gulp.src(['./dist/server/**/*.js',
-        './dist/server/**/*.map'
+        './dist/server/**/*.map',
+        './dist/server/**/*.css'
     ]).pipe(deletefile({
-        reg: /index/ig,
+        reg: /(index\.js$)|(manifest)/ig,
         deleteMatch: false
     }))
 });

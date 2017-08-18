@@ -84,7 +84,9 @@ module.exports = {
         new webpack.DefinePlugin({
             'process.env': {
                 BROWSER: JSON.stringify(false),
-                NODE_ENV: JSON.stringify('development')
+                NODE_ENV: JSON.stringify('development'),
+                DIR_PATH: JSON.stringify('dist/server'),
+                ASSETS: {}
             }
         }),
 

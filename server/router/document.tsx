@@ -1,10 +1,10 @@
-import Routes from "./../../route/backendRoute";
 import Store from "_store";
 import * as React from "react";
 import {renderToString} from "react-dom/server";
 import {Helmet} from "react-helmet";
 import {Provider} from "react-redux";
 import * as serialize from "serialize-javascript";
+import Routes from "./../../route/backendRoute";
 
 interface IpropertyRender {
     location: string;
@@ -16,10 +16,12 @@ interface IHTMLRender {
     context: any;
 }
 
+const ASSETS: any = process.env.ASSETS;
+
 export const HTML = ({html = "", context = {}}: IHTMLRender): React.ReactElement<IHTMLRender> => {
     const helmet = Helmet.renderStatic();
     return (
-        <html>
+        <html manifest="/appcache/manifest.appcache">
         <head>
             {helmet.title.toComponent()}
             {helmet.meta.toComponent()}
@@ -27,10 +29,10 @@ export const HTML = ({html = "", context = {}}: IHTMLRender): React.ReactElement
         </head>
         <body>
         <div id="application" dangerouslySetInnerHTML={{ __html: html }} />
-        <script dangerouslySetInnerHTML={{ __html: `window.__initialState__=${serialize(context)};` }}/>
-        <script src="/vendor.js" type="text/javascript"/>
-        <script src="/style.js" type="text/javascript"/>
-        <script src="/bundle.js" type="text/javascript"/>
+        <script dangerouslySetInnerHTML={{ __html: `window.__initialState__=${serialize(context)}; window.ASSETS=${JSON.stringify(ASSETS)}` }}/>
+        <script src={`/${ASSETS["vendor.js"] || "vendor.js"}`} type="text/javascript"/>
+        <script src={`/${ASSETS["style.js"] || "style.js"}`} type="text/javascript"/>
+        <script src={`/${ASSETS["bundle.js"] || "bundle.js"}`} type="text/javascript"/>
         </body>
         </html>);
 };
