@@ -1,0 +1,24 @@
+{
+  "apps" : [{
+    "name"              : "myApp",
+    "script"            : "./dist/server",
+    "watch"             : false,
+    "node_args"         : ["--harmony", "--max_old_space_size=2048", "--expose-gc"],
+    "merge_logs"        : true,
+    "env": {
+      "PORT"            : 1337,
+      "NODE_ENV"        : "development",
+      "WEB"             : "development"
+    },
+    "env_production": {
+      "PORT"            : 1337,
+      "NODE_ENV"        : "production",
+      "WEB"             : "production"
+    },
+    "instances"         : 4,
+    "exec_mode"         : "cluster_mode",
+    "error_file"        : "./.logs/child-err.log",
+    "out_file"          : "./.logs/child-out.log",
+    "pid_file"          : "./.logs/child.pid"
+  }]
+}

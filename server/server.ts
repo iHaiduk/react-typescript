@@ -26,10 +26,10 @@ app.use(async (ctx, next) => {
 });
 
 // if (process.env.NODE_ENV !== "production") {
-    const serve = require("koa-static");
-    const staticPath = resolve(__dirname, "..", "dist", "public");
-    log.info("Public folder:", staticPath);
-    app.use(serve(staticPath));
+const serve = require("koa-static");
+const staticPath = resolve(__dirname, "..", "dist", "public");
+log.info("Public folder:", staticPath);
+app.use(serve(staticPath));
 // }
 
 routing.call(routing, app, new Router());

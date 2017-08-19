@@ -7,11 +7,8 @@ npm-debug.log*
 yarn.lock
 
 # Build
-dist/bundle.js*
-dist/main.css*
-/.awcache/
 .awcache/
 .idea/
-/dist/
+.logs
 dist/
 tsconfig.json

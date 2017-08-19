@@ -40,5 +40,4 @@ connection.on("error", (error: any) => {
     connection.close();
 });
 
-
 export default connection;

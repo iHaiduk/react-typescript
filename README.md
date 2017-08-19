@@ -58,6 +58,9 @@ This system was created for start any project on NodeJs and React.
 ##Progressive Web App
 - [offline-plugin](https://github.com/NekR/offline-plugin) v3.1.4
 
+##Production process manager for Node.js
+- [PM2](https://github.com/Unitech/pm2) latest
+
 ## Getting Started
 Requirement:
 
@@ -127,7 +130,7 @@ $ npm run lint
 - [x] Add Redis.io v4+
 - [x] Connect socket.io with Redis
 - [x] Add ServiceWorker and AppCache
-- [ ] PM2 Start server
+- [x] PM2 Start server
 - [ ] SVG sprite generator
 - [ ] Tinypng for images
 - [ ] Authorization Token System
@@ -150,6 +153,7 @@ Folder Structure Conventions
     ├── tools                   # Tools and utilities
     ├── .gitignore
     ├── .scss-lint.yml
+    ├── ecosystem.json          # Config file for PM2
     ├── gulpfile.js
     ├── package.json
     ├── README.md

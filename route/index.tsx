@@ -42,38 +42,3 @@ if (process.env.NODE_ENV === "production") {
 }
 
 export default AppComponent;
-
-/*
-import {Home} from "_containers/Home";
-import {Test} from "_containers/Test";
-import * as React from "react";
-import {Route, Switch} from "react-router";
-import {Router} from "react-router-dom";
-
-// console.log(import("_containers/Home"))
-
-const Routes = () => (
-    <Switch>
-        <Route exact={true} path="/" component={Home}/>
-        <Route path="/test" component={Test}/>
-    </Switch>
-);
-
-interface IApp {
-    action: any;
-    listen: (location: any) => any;
-    location: string;
-    children?: React.ReactNode;
-}
-
-const App: React.StatelessComponent<IApp> = (props) => {
-    return React.createElement(
-        Router,
-        props as any,
-        React.createElement(Routes, null),
-    );
-};
-const AppComponent = process.env.BROWSER ? App : App;
-
-export default AppComponent;
- */

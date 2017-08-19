@@ -45,8 +45,6 @@ fs.readdirSync(resolve(__dirname, "..", "styles")).forEach(file => {
     }
 });
 
-console.log(excludes_offline)
-
 module.exports = {
     // To enhance the debugging process. More info: https://webpack.js.org/configuration/devtool/
     devtool: false,

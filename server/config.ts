@@ -45,7 +45,7 @@ export const database = {
         user: "",
     },
     development: "mongodb://localhost/olympic",
-    production: "mongodb://localhost/book",
+    production: "mongodb://localhost/olympic",
 };
 
 export const redisConfig = {

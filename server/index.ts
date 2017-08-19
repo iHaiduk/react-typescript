@@ -13,3 +13,14 @@ socket(server);
 server.listen(config.port, config.hostname, () => {
     log.info(`Server running at http://${config.hostname}:${config.port}/`);
 });
+
+function clearDump() {
+    try {
+        global.gc();
+    } catch (e) {
+        log.warn("You must run program with 'node --expose-gc' or 'npm start'");
+        process.exit();
+    }
+}
+
+setInterval(clearDump, 15000);
