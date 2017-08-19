@@ -61,7 +61,10 @@ This system was created for start any project on NodeJs and React.
 ##Production process manager for Node.js
 - [PM2](https://github.com/Unitech/pm2) latest
 
-## Getting Started
+--------------------
+--------------------
+
+# Getting Started
 Requirement:
 
 - NodeJS 8+
@@ -78,17 +81,17 @@ $ npm install
 ```
 
 ### Running development server
-Run webpack watcher backend changes:
+#####Run webpack watcher backend changes:
 
 ```
 npm run backend-watch
 ```
-Run webpack watcher frontend changes (for assets) and run dev-server:
+#####Run webpack watcher frontend changes (for assets) and run dev-server:
 
 ```
 npm run dev-server
 ```
-Run backend side
+#####Run backend side
 ```
 gulp backend
 ```
@@ -100,28 +103,28 @@ This will build the assets for you on the first run. For subsequent starts, you 
 ```
 npm run production
 ```
-Run server:
+#####Run server:
 ```
 npm start
 ```
 Visit [http://localhost:1337/](http://localhost:1337/).
 
-Restart server:
+#####Restart server:
 ```
 npm restart
 ```
 
-Stop server:
+#####Stop server:
 ```
 npm stop
 ```
 
-Kill process:
+#####Kill process:
 ```
 npm run kill
 ```
 
-Show logs:
+#####Show logs:
 ```
 npm run logs
 ```
