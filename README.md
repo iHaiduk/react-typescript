@@ -55,6 +55,9 @@ This system was created for start any project on NodeJs and React.
 - [React-router-redux](https://github.com/ReactTraining/react-router/tree/master/packages/react-router-redux) v5.0.0-alpha.6
 - [react-helmet](https://github.com/nfl/react-helmet) v5.1.3
 
+##Progressive Web App
+- [offline-plugin](https://github.com/NekR/offline-plugin) v3.1.4
+
 ## Getting Started
 Requirement:
 
@@ -123,7 +126,7 @@ $ npm run lint
 - [x] Add database - MongoDB
 - [x] Add Redis.io v4+
 - [x] Connect socket.io with Redis
-- [ ] Add ServiceWorker and AppCache
+- [x] Add ServiceWorker and AppCache
 - [ ] PM2 Start server
 - [ ] SVG sprite generator
 - [ ] Tinypng for images
