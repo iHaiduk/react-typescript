@@ -77,7 +77,7 @@ $ yarn install
 $ npm install
 ```
 
-## Running development server
+### Running development server
 Run webpack watcher backend changes:
 
 ```
@@ -94,7 +94,7 @@ gulp backend
 ```
 Visit [http://localhost:3000/](http://localhost:3000/).
 
-## Running production server
+### Running production server
 This will build the assets for you on the first run. For subsequent starts, you should run:
 
 ```
@@ -102,9 +102,29 @@ npm run production
 ```
 Run server:
 ```
-npm run server
+npm start
 ```
 Visit [http://localhost:1337/](http://localhost:1337/).
+
+Restart server:
+```
+npm restart
+```
+
+Stop server:
+```
+npm stop
+```
+
+Kill process:
+```
+npm run kill
+```
+
+Show logs:
+```
+npm run logs
+```
 
 ## Linting Test
 ##### Style
