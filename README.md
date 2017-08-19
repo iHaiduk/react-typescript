@@ -22,7 +22,7 @@ This system was created for start any project on NodeJs and React.
 - [React-router-redux](https://github.com/ReactTraining/react-router/tree/master/packages/react-router-redux) v5.0.0-alpha.6
 - [react-helmet](https://github.com/nfl/react-helmet) v5.1.3
 ###### Babel
-- [babel-loader](https://github.com/babel/babel-loader) v7.1.1
+- [babel-loader](https://github.com/babel/babel-loader) v7.1.2
 - [babel-plugin-transform-runtime](https://babeljs.io/docs/plugins/transform-runtime/) v6.23.0
 - [babel-preset-es2015](https://babeljs.io/docs/plugins/preset-es2015/) v6.24.1
 - [babel-preset-stage-0](https://babeljs.io/docs/plugins/preset-stage-0/) v6.24.1
