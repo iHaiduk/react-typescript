@@ -26,6 +26,7 @@
       "_reducers":        ["./store/reducers/index"],
       "_route":           ["./route/index"],
       "_store":           ["./store/index"],
+      "_static/*":        ["./static/*"],
       "_stylesLoad/*":    ["./styles/*"],
       "_style":           ["./styles/index"]
     },

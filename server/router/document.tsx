@@ -1,4 +1,6 @@
 import Store from "_store";
+import * as fs from "fs";
+import {resolve} from "path";
 import * as React from "react";
 import {renderToString} from "react-dom/server";
 import {Helmet} from "react-helmet";
@@ -17,6 +19,7 @@ interface IHTMLRender {
 }
 
 const ASSETS: any = process.env.ASSETS;
+const sprite: string = fs.readFileSync(resolve("dist/public/sprite.svg"), "utf-8");
 
 export const HTML = ({html = "", context = {}}: IHTMLRender): React.ReactElement<IHTMLRender> => {
     const helmet = Helmet.renderStatic();
@@ -28,6 +31,7 @@ export const HTML = ({html = "", context = {}}: IHTMLRender): React.ReactElement
             {helmet.link.toComponent()}
         </head>
         <body>
+        <span dangerouslySetInnerHTML={{ __html: sprite }}/>
         <div id="application" dangerouslySetInnerHTML={{ __html: html }} />
         <script dangerouslySetInnerHTML={{ __html: `window.__initialState__=${serialize(context)}; window.ASSETS=${JSON.stringify(ASSETS)}` }}/>
         <script src={`/${ASSETS["vendor.js"] || "vendor.js"}`} type="text/javascript"/>

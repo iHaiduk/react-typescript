@@ -6,6 +6,7 @@ const WebpackErrorNotificationPlugin = require('webpack-error-notification');
 const BellOnBundlerErrorPlugin = require('bell-on-bundler-error-plugin');
 const BabiliPlugin = require("babili-webpack-plugin");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const SpriteLoaderPlugin = require('svg-sprite-loader/plugin');
 
 const entry = {
     index: [
@@ -55,6 +56,7 @@ module.exports = {
             "_reducers": resolve(__dirname, '..', 'store/reducers/index.ts'),
             "_route": resolve(__dirname, '..', 'route/index.tsx'),
             "_store": resolve(__dirname, '..', 'store/index.ts'),
+            "_static": resolve(__dirname, '..', 'static'),
             "_stylesLoad": resolve(__dirname, '..', 'styles'),
             "_style": resolve(__dirname, '..', 'styles/index.ts')
         }
@@ -96,7 +98,8 @@ module.exports = {
         // do not emit compiled assets that include errors
         new WebpackErrorNotificationPlugin(),
         new BellOnBundlerErrorPlugin(),
-        new ExtractTextPlugin("../public/style/[name].css")
+        new ExtractTextPlugin("../public/style/[name].css"),
+        new SpriteLoaderPlugin(),
     ],
     module: {
         rules: [
@@ -141,6 +144,15 @@ module.exports = {
                         ]
                     })
 
+            },
+            {
+                test: /\.svg$/,
+                loader: 'svg-sprite-loader',
+                include: resolve('./static'),
+                options: {
+                    extract: true,
+                    spriteFilename: '../public/sprite.svg'
+                }
             },
             // Once TypeScript is configured to output source maps we need to tell webpack
             // to extract these source maps and pass them to the browser,

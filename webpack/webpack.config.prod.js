@@ -78,6 +78,7 @@ module.exports = {
             "_reducers": resolve(__dirname, '..', 'store/reducers/index.ts'),
             "_route": resolve(__dirname, '..', 'route/index.tsx'),
             "_store": resolve(__dirname, '..', 'store/index.ts'),
+            "_static": resolve(__dirname, '..', 'static'),
             "_stylesLoad": resolve(__dirname, '..', 'styles'),
             "_style": resolve(__dirname, '..', 'styles/index.ts')
         }

@@ -43,6 +43,7 @@
       "_store": [
         "./store/index"
       ],
+      "_static/*":        ["./static/*"],
       "_stylesLoad/*": [
         "./styles/*"
       ],
@@ -56,6 +57,7 @@
   "include": [
     "./server/**/*",
     "./route/**/*",
+    "./static/**/*",
     "./store/**/*",
     "./styles/**/*",
     "./view/**/*"

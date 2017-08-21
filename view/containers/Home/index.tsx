@@ -1,4 +1,5 @@
 import {Header} from "_blocks/Header";
+import {IconComponent} from "_components/Icon";
 import {PureComponent} from "_components/PureComponent";
 import {sectionStyle} from "_style";
 import * as React from "react";
@@ -24,6 +25,7 @@ export class Home extends React.Component<IHelloProps, undefined> {
                 <Header/>
                 <PureComponent tag="main">
                     Main
+                    <IconComponent />
                     <Link to={"/"}>Home</Link>
                     <Link to={"/test"}>test</Link>
                 </PureComponent>

@@ -1,11 +1,11 @@
 const fs = require('fs');
 const resolve = require('path').resolve;
 const webpack = require('webpack');
-const DashboardPlugin = require('webpack-dashboard/plugin');
 const WebpackErrorNotificationPlugin = require('webpack-error-notification');
 const BellOnBundlerErrorPlugin = require('bell-on-bundler-error-plugin');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
-const OfflinePlugin = require('offline-plugin');
+const SpriteLoaderPlugin = require('svg-sprite-loader/plugin');
+// const OfflinePlugin = require('offline-plugin');
 
 const entry = {
     bundle: [
@@ -111,12 +111,12 @@ module.exports = {
             "_reducers": resolve(__dirname, '..', 'store/reducers/index.ts'),
             "_route": resolve(__dirname, '..', 'route/index.tsx'),
             "_store": resolve(__dirname, '..', 'store/index.ts'),
+            "_static": resolve(__dirname, '..', 'static'),
             "_stylesLoad": resolve(__dirname, '..', 'styles'),
             "_style": resolve(__dirname, '..', 'styles/index.ts')
         }
     },
     plugins: [
-        new DashboardPlugin(),
         // new CheckerPlugin(),
         new webpack.LoaderOptionsPlugin({
             debug: true,
@@ -147,10 +147,11 @@ module.exports = {
         }),
 
         // do not emit compiled assets that include errors
-        new WebpackErrorNotificationPlugin(),
+        // new WebpackErrorNotificationPlugin(),
         new BellOnBundlerErrorPlugin(),
         new ExtractTextPlugin("style/[name].css"),
-        new OfflinePlugin()
+        new SpriteLoaderPlugin(),
+        // new OfflinePlugin()
     ],
     module: {
         // loaders -> rules in webpack 2
@@ -196,6 +197,15 @@ module.exports = {
                         ]
                     })
 
+            },
+            {
+                test: /\.svg$/,
+                loader: 'svg-sprite-loader',
+                include: resolve('./static'),
+                options: {
+                    extract: true,
+                    spriteFilename: 'sprite.svg'
+                }
             },
             // Once TypeScript is configured to output source maps we need to tell webpack
             // to extract these source maps and pass them to the browser,
