@@ -42,6 +42,10 @@ This system was created for start any project on NodeJs and React.
 - [bcryptjs](https://github.com/dcodeIO/bcrypt.js) v2.4.3
 - [jsonwebtoken](https://jwt.io/) v7.4.2
 
+###### For SVG
+- [svg-sprite-loader](https://github.com/kisenka/svg-sprite-loader) v3.2.4
+- [gulp-svgo](https://github.com/corneliusio/gulp-svgo) v1.2.5
+
 ###### Logging
 - [pino](http://getpino.io/) v4.7.1
 
@@ -154,7 +158,7 @@ $ npm run lint
 - [x] Connect socket.io with Redis
 - [x] Add ServiceWorker and AppCache
 - [x] PM2 Start server
-- [ ] SVG sprite generator
+- [x] SVG sprite generator
 - [ ] Tinypng for images
 - [ ] Authorization Token System
 - [ ] Update React to v16

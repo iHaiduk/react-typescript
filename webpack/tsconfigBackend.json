@@ -49,6 +49,9 @@
       ],
       "_style": [
         "./styles/index"
+      ],
+      "_server/*": [
+        "./server/*"
       ]
     },
     "experimentalDecorators": true,

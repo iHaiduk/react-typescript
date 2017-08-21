@@ -4,70 +4,48 @@
     "outDir": "./dist/",
     "sourceMap": true,
     "noImplicitAny": true,
-    "module": "commonjs",
-    "moduleResolution": "node",
+    "module": "esnext",
     "target": "es2015",
+    "lib": [ "es2015", "es2015.promise", "dom" ],
+    "moduleResolution": "node",
     "importHelpers": true,
     "jsx": "react",
     "baseUrl": "./",
+    "allowSyntheticDefaultImports": true,
     "removeComments": false,
     "allowUnusedLabels": false,
     "noImplicitThis": true,
     "noUnusedLocals": true,
     "noUnusedParameters": false,
     "paths": {
-      "_actions": [
-        "./store/actions/index"
-      ],
-      "_blocks/*": [
-        "./view/block/*"
-      ],
-      "_config": [
-        "./server/config"
-      ],
-      "_components/*": [
-        "./view/components/*"
-      ],
-      "_containers/*": [
-        "./view/containers/*"
-      ],
-      "_models": [
-        "./server/db/models"
-      ],
-      "_reducers": [
-        "./store/reducers/index"
-      ],
-      "_route": [
-        "./route/index"
-      ],
-      "_store": [
-        "./store/index"
-      ],
+      "_actions":         ["./store/actions/index"],
+      "_blocks/*":        ["./view/block/*"],
+      "_components/*":    ["./view/components/*"],
+      "_containers/*":    ["./view/containers/*"],
+      "_reducers":        ["./store/reducers/index"],
+      "_route":           ["./route/index"],
+      "_store":           ["./store/index"],
       "_static/*":        ["./static/*"],
-      "_stylesLoad/*": [
-        "./styles/*"
-      ],
-      "_style": [
-        "./styles/index"
-      ]
+      "_stylesLoad/*":    ["./styles/*"],
+      "_style":           ["./styles/index"]
     },
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true
   },
   "include": [
-    "./server/**/*",
+    "./client/**/*",
     "./route/**/*",
-    "./static/**/*",
     "./store/**/*",
+    "./static/**/*",
     "./styles/**/*",
     "./view/**/*"
   ],
   "awesomeTypescriptLoaderOptions": {
     "forkChecker": true,
-    "useWebpackText": true,
-    "useBabel": true,
+    "useWebpackText": false,
     "useCache": true,
-    "useTranspileModule": true
+    "useTranspileModule": true,
+    "silent": true
   },
   "compileOnSave": false,
   "buildOnSave": false

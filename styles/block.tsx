@@ -1,12 +1,13 @@
 import * as React from "react";
 import {Helmet} from "react-helmet";
 
+const ASSETS: any = process.env.BROWSER ? (window as any).ASSETS : require("_server/router/document").ASSETS;
+
 declare interface IBlock {
     header: string;
 }
 
 export const block: IBlock = (require as any)("./block.scss");
-const ASSETS: any = process.env.BROWSER ? (window as any).ASSETS : process.env.ASSETS;
 
 export const blockStyle = (Elem: any): any => {
 

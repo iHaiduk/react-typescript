@@ -7,6 +7,7 @@ const WebpackErrorNotificationPlugin = require('webpack-error-notification');
 const BellOnBundlerErrorPlugin = require('bell-on-bundler-error-plugin');
 const OfflinePlugin = require('offline-plugin');
 const ManifestPlugin = require('webpack-manifest-plugin');
+const SpriteLoaderPlugin = require('svg-sprite-loader/plugin');
 
 const entry = {
     bundle: './client/index.tsx',
@@ -155,7 +156,8 @@ module.exports = {
         }),
         new ManifestPlugin({
             fileName: "../server/manifest.json"
-        })
+        }),
+        new SpriteLoaderPlugin(),
     ],
     module: {
         rules: [
@@ -204,6 +206,19 @@ module.exports = {
                         ]
                     })
 
+            },
+            {
+                test: /\.svg$/,
+                use: [
+                    {
+                        loader: 'svg-sprite-loader',
+                        options: {
+                            extract: false,
+                            spriteFilename: 'sprite.svg'
+                        }
+                    }
+                ],
+                include: resolve('./static')
             },
             // Once TypeScript is configured to output source maps we need to tell webpack
             // to extract these source maps and pass them to the browser,

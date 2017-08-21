@@ -8,12 +8,14 @@ export class IconComponent extends React.PureComponent<any, undefined> {
 
     public render() {
 
-        const icon = require("_static/icon/download.svg").default as any;
+        const {name} = this.props;
+
+        const icon = require("_static/icon/" + name + ".svg").default as any;
 
         console.log(icon);
 
         return <svg viewBox={icon.viewBox}>
-            <use xlinkHref={"#download"} />
+            <use xlinkHref={`#${icon.id}`} />
         </svg>;
     }
 }

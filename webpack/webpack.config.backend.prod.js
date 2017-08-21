@@ -8,6 +8,7 @@ const BabiliPlugin = require("babili-webpack-plugin");
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const SpriteLoaderPlugin = require('svg-sprite-loader/plugin');
 
 const entry = {
     index: resolve(__dirname, '../server', 'index.ts'),
@@ -53,7 +54,8 @@ module.exports = {
             "_store": resolve(__dirname, '..', 'store/index.ts'),
             "_static": resolve(__dirname, '..', 'static'),
             "_stylesLoad": resolve(__dirname, '..', 'styles'),
-            "_style": resolve(__dirname, '..', 'styles/index.ts')
+            "_style": resolve(__dirname, '..', 'styles/index.ts'),
+            "_server": resolve(__dirname, '..', 'server')
         }
     },
     node: {
@@ -79,16 +81,13 @@ module.exports = {
             root: resolve(__dirname, '..')
         }),
         new webpack.DefinePlugin({
-            'process.env': {
-                BROWSER: JSON.stringify(false),
-                NODE_ENV: JSON.stringify('production'),
-                WEB: JSON.stringify('production'),
-                ASSETS: assets
-            }
+            'process.env.BROWSER': JSON.stringify(false),
+            'process.env.ASSETS': assets
         }),
 
         new ExtractTextPlugin("style/[name].css"),
-        new BabiliPlugin()
+        new BabiliPlugin(),
+        new SpriteLoaderPlugin(),
     ],
     module: {
         rules: [
@@ -137,6 +136,19 @@ module.exports = {
                         ]
                     })
 
+            },
+            {
+                test: /\.svg$/,
+                use: [
+                    {
+                        loader: 'svg-sprite-loader',
+                        options: {
+                            extract: true,
+                            spriteFilename: '../public/sprite.svg'
+                        }
+                    }
+                ],
+                include: resolve('./static')
             },
             // Once TypeScript is configured to output source maps we need to tell webpack
             // to extract these source maps and pass them to the browser,

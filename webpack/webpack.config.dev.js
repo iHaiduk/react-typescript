@@ -200,12 +200,16 @@ module.exports = {
             },
             {
                 test: /\.svg$/,
-                loader: 'svg-sprite-loader',
-                include: resolve('./static'),
-                options: {
-                    extract: true,
-                    spriteFilename: 'sprite.svg'
-                }
+                use: [
+                    {
+                        loader: 'svg-sprite-loader',
+                        options: {
+                            extract: true,
+                            spriteFilename: 'sprite.svg'
+                        }
+                    }
+                ],
+                include: resolve('./static')
             },
             // Once TypeScript is configured to output source maps we need to tell webpack
             // to extract these source maps and pass them to the browser,

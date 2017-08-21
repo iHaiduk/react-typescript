@@ -58,7 +58,8 @@ module.exports = {
             "_store": resolve(__dirname, '..', 'store/index.ts'),
             "_static": resolve(__dirname, '..', 'static'),
             "_stylesLoad": resolve(__dirname, '..', 'styles'),
-            "_style": resolve(__dirname, '..', 'styles/index.ts')
+            "_style": resolve(__dirname, '..', 'styles/index.ts'),
+            "_server": resolve(__dirname, '..', 'server')
         }
     },
     node: {
@@ -84,12 +85,8 @@ module.exports = {
             root: resolve(__dirname, '..')
         }),
         new webpack.DefinePlugin({
-            'process.env': {
-                BROWSER: JSON.stringify(false),
-                NODE_ENV: JSON.stringify('development'),
-                DIR_PATH: JSON.stringify('dist/server'),
-                ASSETS: {}
-            }
+            'process.env.BROWSER': JSON.stringify(false),
+            'process.env.ASSETS': {}
         }),
 
         // prints more readable module names in the browser console on HMR updates
@@ -147,12 +144,16 @@ module.exports = {
             },
             {
                 test: /\.svg$/,
-                loader: 'svg-sprite-loader',
-                include: resolve('./static'),
-                options: {
-                    extract: true,
-                    spriteFilename: '../public/sprite.svg'
-                }
+                use: [
+                    {
+                        loader: 'svg-sprite-loader',
+                        options: {
+                            extract: true,
+                            spriteFilename: '../public/sprite.svg'
+                        }
+                    }
+                ],
+                include: resolve('./static')
             },
             // Once TypeScript is configured to output source maps we need to tell webpack
             // to extract these source maps and pass them to the browser,

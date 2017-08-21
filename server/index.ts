@@ -18,9 +18,13 @@ function clearDump() {
     try {
         global.gc();
     } catch (e) {
-        log.warn("You must run program with 'node --expose-gc' or 'npm start'");
-        process.exit();
+        if (process.env.NODE_ENV === "production") {
+            log.warn("You must run program with 'node --expose-gc' or 'npm start'");
+            process.exit();
+        }
     }
 }
 
-setInterval(clearDump, 15000);
+if (process.env.NODE_ENV === "production") {
+    setInterval(clearDump, 15000);
+}

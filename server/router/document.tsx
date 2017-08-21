@@ -18,7 +18,7 @@ interface IHTMLRender {
     context: any;
 }
 
-const ASSETS: any = process.env.ASSETS;
+export const ASSETS: any = process.env.ASSETS;
 const sprite: string = fs.readFileSync(resolve("dist/public/sprite.svg"), "utf-8");
 
 export const HTML = ({html = "", context = {}}: IHTMLRender): React.ReactElement<IHTMLRender> => {

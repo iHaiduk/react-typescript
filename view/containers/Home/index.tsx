@@ -25,7 +25,7 @@ export class Home extends React.Component<IHelloProps, undefined> {
                 <Header/>
                 <PureComponent tag="main">
                     Main
-                    <IconComponent />
+                    <IconComponent name="download" />
                     <Link to={"/"}>Home</Link>
                     <Link to={"/test"}>test</Link>
                 </PureComponent>
