@@ -173,6 +173,7 @@ Folder Structure Conventions
     ├── dist                    # Compiled files
     ├── route                   # Files for routing application
     ├── server                  # Server load applicaton
+    ├── static                  # Static files
     ├── store                   # Redux store
     ├── styles                  # Application styles
     ├── view                    # React view components
