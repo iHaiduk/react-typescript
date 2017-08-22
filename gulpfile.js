@@ -6,6 +6,7 @@ const nodemon = require('gulp-nodemon');
 const deletefile = require('gulp-delete-file');
 const svgo = require('gulp-svgo');
 const watch = require('gulp-watch');
+const tinypng = require('gulp-tinypng');
 
 let style_js_remove = [];
 
@@ -40,6 +41,11 @@ gulp.task('backend', () => {
     }
 });
 
+gulp.task('watchImages', () => {
+    return watch('./static/original_images/**/*.{png,jpg,jpeg}', () => {
+        gulp.start('tinypng');
+    });
+});
 
 gulp.task('svgoDev', () => {
 
@@ -59,7 +65,18 @@ gulp.task('svgoDev', () => {
 
 gulp.task('------Production------');
 
-gulp.task('prebuild', (callback) => {
+
+
+gulp.task('tinypng', function () {
+    gulp.src('./static/original_images/**/*.{png,jpg,jpeg}')
+        .pipe(tinypng({
+            apiKey: ['RsN84oBjmXxPkCB5s_ZlfA1fRS1U32LY', 'bN4uZbaI06-ESRiKhD6yS3P4NF9zle7W', 'durCxw2lwQgJmxvwOnpyLrMdEsNEImOY'],
+            cached: true
+        }))
+        .pipe(gulp.dest('./static/images'));
+});
+
+gulp.task('prebuild', ['tinypng'], (callback) => {
     try {
         exec('npm run productionFrontend', (err, stdout, stderr) => {
             if(err != null) {

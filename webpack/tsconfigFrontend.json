@@ -44,6 +44,7 @@
     "forkChecker": true,
     "useWebpackText": false,
     "useCache": true,
+    "cacheDirectory": ".gulp/ts",
     "useTranspileModule": true,
     "silent": true
   },

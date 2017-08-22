@@ -70,6 +70,7 @@
     "useWebpackText": true,
     "useBabel": true,
     "useCache": true,
+    "cacheDirectory": ".gulp/ts",
     "useTranspileModule": true
   },
   "compileOnSave": false,

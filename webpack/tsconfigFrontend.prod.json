@@ -47,6 +47,7 @@
     "useTranspileModule": true,
     "silent": true,
     "useBabel": true,
+    "cacheDirectory": ".gulp/ts",
     "babelOptions": {
       "presets": ["react-optimize", "stage-0"]
     },

@@ -159,8 +159,9 @@ $ npm run lint
 - [x] Add ServiceWorker and AppCache
 - [x] PM2 Start server
 - [x] SVG sprite generator
-- [ ] Tinypng for images
-- [ ] Authorization Token System
+- [ ] Load images from static
+- [x] Tinypng for images
+- [ ] ~~Authorization Token System~~ System has JWT module
 - [ ] Update React to v16
 - [ ] Add pipelines
 - [ ] Add testing
