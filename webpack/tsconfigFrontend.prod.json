@@ -27,6 +27,7 @@
       "_route":           ["./route/index"],
       "_store":           ["./store/index"],
       "_static/*":        ["./static/*"],
+      "_images/*":        ["./static/images/*"],
       "_stylesLoad/*":    ["./styles/*"],
       "_style":           ["./styles/index"]
     },

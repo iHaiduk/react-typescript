@@ -43,6 +43,7 @@
       "_static/*": [
         "./static/*"
       ],
+      "_images/*":        ["./static/images/*"],
       "_stylesLoad/*": [
         "./styles/*"
       ],

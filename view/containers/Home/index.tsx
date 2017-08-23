@@ -6,6 +6,10 @@ import * as React from "react";
 import {Link} from "react-router-dom";
 import {IHelloProps} from "./interface";
 
+const img = require('_images/log.png');
+
+console.log(img)
+
 @sectionStyle
 export class Home extends React.Component<IHelloProps, undefined> {
 

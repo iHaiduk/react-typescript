@@ -27,7 +27,7 @@ app.use(async (ctx, next) => {
 
 if (typeof process.env.STATIC_PATH === "string") {
     const serve = require("koa-static");
-    const staticPath = resolve(process.env.STATIC_PATH);//__dirname, "..", "dist", "public");
+    const staticPath = resolve(process.env.STATIC_PATH);
     log.info("Public folder:", staticPath);
     app.use(serve(staticPath));
 }

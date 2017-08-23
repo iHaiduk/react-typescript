@@ -57,6 +57,7 @@ module.exports = {
             "_route": resolve(__dirname, '..', 'route/index.tsx'),
             "_store": resolve(__dirname, '..', 'store/index.ts'),
             "_static": resolve(__dirname, '..', 'static'),
+            "_images": resolve(__dirname, '..', 'static/images'),
             "_stylesLoad": resolve(__dirname, '..', 'styles'),
             "_style": resolve(__dirname, '..', 'styles/index.ts'),
             "_server": resolve(__dirname, '..', 'server')
@@ -153,7 +154,23 @@ module.exports = {
                         }
                     }
                 ],
-                include: resolve('./static')
+                include: resolve('./static/icon')
+            },
+            {
+                test: /\.(png|jpg|gif)$/,
+                use: [
+                    {
+                        loader: 'file-loader',
+                        options: {
+                            name: '[sha512:hash:base64:7].[ext]',
+                            publicPath: function(url) {
+                                return url.replace('../public/images/', '/images/')
+                            },
+                            outputPath: '../public/images/'
+                        }
+                    }
+                ],
+                include: resolve('./static/images')
             },
             // Once TypeScript is configured to output source maps we need to tell webpack
             // to extract these source maps and pass them to the browser,
@@ -174,14 +191,7 @@ module.exports = {
             {
                 test: /\.ts(x?)$/,
                 use: [
-                    {
-                        loader: 'string-replace-loader',
-                        options: {
-                            search: '_import',
-                            replace: 'import',
-                            flags: 'ig'
-                        }
-                    },
+                    // {loader: 'react-hot-loader/webpack'},
                     {loader: 'awesome-typescript-loader'}
                 ],
                 exclude: /node_modules/,

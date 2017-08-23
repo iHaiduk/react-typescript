@@ -1,21 +1,25 @@
 import * as React from "react";
+import {IIcon} from "./interface";
 
-export class IconComponent extends React.PureComponent<any, undefined> {
+export class IconComponent extends React.PureComponent<IIcon, undefined> {
 
-    constructor(props: any) {
+    public static defaultProps: IIcon = {
+        name: null,
+        viewBox: "0 0 24 24",
+    };
+
+    constructor(props: IIcon) {
         super(props);
     }
 
     public render() {
 
-        const {name} = this.props;
+        const {name, viewBox} = this.props;
 
-        const icon = require("_static/icon/" + name + ".svg").default as any;
-
-        console.log(icon);
-
-        return <svg viewBox={icon.viewBox}>
-            <use xlinkHref={`#${icon.id}`} />
-        </svg>;
+        return name && (
+            <svg viewBox={viewBox}>
+                <use xlinkHref={`#${name}`}/>
+            </svg>
+        );
     }
 }
