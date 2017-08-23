@@ -4,61 +4,38 @@
     "outDir": "./dist/",
     "sourceMap": false,
     "noImplicitAny": true,
-    "module": "commonjs",
+    "module": "esnext",
+    "target": "es5",
+    "lib": [ "es2015", "es2015.promise", "dom" ],
     "moduleResolution": "node",
-    "target": "es2015",
     "importHelpers": true,
     "jsx": "react",
     "baseUrl": "./",
-    "removeComments": true,
+    "allowSyntheticDefaultImports": true,
+    "removeComments": false,
     "allowUnusedLabels": false,
     "noImplicitThis": true,
     "noUnusedLocals": true,
     "noUnusedParameters": false,
     "paths": {
-      "_actions": [
-        "./store/actions/index"
-      ],
-      "_blocks/*": [
-        "./view/block/*"
-      ],
-      "_config": [
-        "./server/config"
-      ],
-      "_components/*": [
-        "./view/components/*"
-      ],
-      "_containers/*": [
-        "./view/containers/*"
-      ],
-      "_reducers": [
-        "./store/reducers/index"
-      ],
-      "_route": [
-        "./route/index"
-      ],
-      "_store": [
-        "./store/index"
-      ],
-      "_static/*": [
-        "./static/*"
-      ],
+      "_actions":         ["./store/actions/index"],
+      "_blocks/*":        ["./view/block/*"],
+      "_config":          ["./server/config"],
+      "_components/*":    ["./view/components/*"],
+      "_containers/*":    ["./view/containers/*"],
+      "_reducers":        ["./store/reducers/index"],
+      "_route":           ["./route/index"],
+      "_store":           ["./store/index"],
+      "_static/*":        ["./static/*"],
       "_images/*":        ["./static/images/*"],
-      "_stylesLoad/*": [
-        "./styles/*"
-      ],
-      "_style": [
-        "./styles/index"
-      ],
-      "_server/*": [
-        "./server/*"
-      ]
+      "_stylesLoad/*":    ["./styles/*"],
+      "_style":           ["./styles/index"]
     },
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true
   },
   "include": [
-    "./server/**/*",
+    "./client/**/*",
     "./route/**/*",
     "./store/**/*",
     "./styles/**/*",
@@ -66,11 +43,15 @@
   ],
   "awesomeTypescriptLoaderOptions": {
     "forkChecker": true,
-    "useWebpackText": true,
-    "useBabel": true,
+    "useWebpackText": false,
     "useCache": true,
+    "useTranspileModule": true,
+    "silent": true,
+    "useBabel": true,
     "cacheDirectory": ".gulp/ts",
-    "useTranspileModule": true
+    "babelOptions": {
+      "presets": ["react-optimize", "stage-0"]
+    },
   },
   "compileOnSave": false,
   "buildOnSave": false
