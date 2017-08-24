@@ -64,6 +64,9 @@ const config: IConfig = {
     redis: redisConfig,
 };
 
+export const ASSETS: any = process.env.ASSETS;
+console.log('ASSETS', ASSETS)
+
 export const logConfig = {level: config.logLevel, safe: true};
 
 export default config;

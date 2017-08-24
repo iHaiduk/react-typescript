@@ -25,6 +25,9 @@
       "_config": [
         "./server/config"
       ],
+      "_helpers/*": [
+        "./helpers/*"
+      ],
       "_components/*": [
         "./view/components/*"
       ],
@@ -43,8 +46,12 @@
       "_store": [
         "./store/index"
       ],
-      "_static/*":        ["./static/*"],
-      "_images/*":        ["./static/images/*"],
+      "_static/*": [
+        "./static/*"
+      ],
+      "_images/*": [
+        "./static/images/*"
+      ],
       "_stylesLoad/*": [
         "./styles/*"
       ],
@@ -61,6 +68,7 @@
   "include": [
     "./server/**/*",
     "./route/**/*",
+    "./helpers/**/*",
     "./static/**/*",
     "./store/**/*",
     "./styles/**/*",

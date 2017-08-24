@@ -21,15 +21,15 @@ gulp.task('------Development------');
 
 gulp.task('backend', () => {
     try {
-        gulp.watch('./dist/public/*.svg', { ignoreInitial: false }, ['svgoDev']);
+        // gulp.watch('./dist/public/*.svg', { ignoreInitial: false }, ['svgoDev']);
 
         return nodemon({
             script: './dist/server/index.js',
             ext: 'js',
-            watch: ['./dist/server/index.js'],
+            watch: ['./dist/server/'],
             env: {
                 'NODE_ENV': 'development',
-                'STATIC_PATH': '../dist/public'
+                'STATIC_PATH': 'dist/public'
             },
             ignore: [
                 'node_modules/'
@@ -47,19 +47,33 @@ gulp.task('watchImages', () => {
     });
 });
 
-gulp.task('svgoDev', () => {
+gulp.task('svgSprite', (callback) => {
+
+    exec('./node_modules/.bin/svg-sprite-generate -d ./static/icon/ -o ./dist/public/sprite.svg', (err, stdout, stderr) => {
+        if(err != null) {
+            callback(err);
+            console.error(err);
+            return
+        }
+        console.info(stdout);
+        console.error(stderr);
+        callback(err);
+    });
+});
+
+gulp.task('svgoDev', ['svgSprite'], () => {
 
     return gulp.src('./dist/public/*.svg', { ignoreInitial: false })
-        .pipe(svgo({
-            plugins: [
-                {removeAttrs: {attrs: ['class', 'fill']}},
-                {removeUselessDefs: true},
-                {removeDoctype: true},
-                {removeStyleElement: true},
-                {removeComments: true},
-                {cleanupNumericValues: { floatPrecision: 2 }}
-            ]
-        }))
+        // .pipe(svgo({
+        //     plugins: [
+        //         {removeAttrs: {attrs: ['class', 'fill']}},
+        //         {removeUselessDefs: true},
+        //         {removeDoctype: true},
+        //         {removeStyleElement: true},
+        //         {removeComments: true},
+        //         {cleanupNumericValues: { floatPrecision: 2 }}
+        //     ]
+        // }))
         .pipe(gulp.dest('./dist/public'));
 });
 

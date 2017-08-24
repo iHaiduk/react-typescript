@@ -22,6 +22,7 @@
       "_blocks/*":        ["./view/block/*"],
       "_components/*":    ["./view/components/*"],
       "_containers/*":    ["./view/containers/*"],
+      "_helpers/*":       ["./helpers/*"],
       "_reducers":        ["./store/reducers/index"],
       "_route":           ["./route/index"],
       "_store":           ["./store/index"],
@@ -36,6 +37,7 @@
   "include": [
     "./client/**/*",
     "./route/**/*",
+    "./helpers/**/*",
     "./store/**/*",
     "./static/**/*",
     "./styles/**/*",
