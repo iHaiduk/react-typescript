@@ -14,4 +14,4 @@ node_js:
 install:
   - npm install
 script:
-  - npm lint
+  - npm run lint
