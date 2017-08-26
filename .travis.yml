@@ -4,8 +4,8 @@ sudo: true
 node_js:
   - "8.4.0"
   - "8.3.0"
-  - "7.10.1"
-  - "6.11.2"
+  - 7
+  -
 
 cache:
   yarn: true
@@ -17,13 +17,22 @@ services:
   - redis-server
 
 before_script:
+  # Begin modification of the default mongoDB instance
   - echo "replSet = rs0" | sudo tee -a /etc/mongodb.conf
   - echo "oplogSize = 250" | sudo tee -a /etc/mongodb.conf
   - echo "nojournal = true" | sudo tee -a /etc/mongodb.conf
-  - sudo service mongodb restart
-  - sleep 20
+
+  # Wipe out the data directory so we are clean with our configuration
+  - sudo rm -rf /var/lib/mongodb/*
+
+  # Start up the service using the normal init script
+  - sudo cat /etc/mongodb.conf
+  - sudo service mongodb start || { cat /var/log/mongodb/mongodb.log; exit 1; }
+
+  # Create the replicaSet and then wait for it to become clean with a primary and secondary
+  - sleep 5
   - mongo --eval "rs.initiate({_id:'rs0',members:[{_id:0,host:'127.0.0.1:27017'}]})"
-  - sleep 15
+  - sleep 5
 
 install:
   - yarn install
