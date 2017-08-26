@@ -16,7 +16,7 @@
     "productionFrontend": "cp ./webpack/tsconfigFrontend.prod.json tsconfig.json && ./node_modules/.bin/webpack --config ./webpack/webpack.config.prod.js",
     "production": "gulp build",
     "-----Lints-----": "",
-    "lint-typescript": "./node_modules/.bin/tslint **/*.ts && tslint --fix **/*.tsx",
+    "lint-typescript": "./node_modules/.bin/tslint **/*.ts && tslint **/*.tsx",
     "lint-typescript-fix": "./node_modules/.bin/tslint --fix ./**/*.ts && tslint --fix ./**/*.tsx",
     "scss-lint": "./node_modules/.bin/sass-lint -c ./.scss-lint.yml styles/**/*.scss -v -q",
     "lint": "npm run scss-lint&&npm run lint-typescript",
