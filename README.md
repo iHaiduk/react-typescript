@@ -184,6 +184,7 @@ Folder Structure Conventions
     ├── tools                   # Tools and utilities
     ├── .gitignore
     ├── .scss-lint.yml
+    ├── .travis.yml             # Config file for Travis CI
     ├── ecosystem.json          # Config file for PM2
     ├── gulpfile.js
     ├── package.json

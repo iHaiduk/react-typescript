@@ -5,7 +5,11 @@ node_js:
   - "8.3.0"
   - "7.10.1"
   - "6.11.2"
+cache:
+  yarn: true
+  directories:
+    - node_modules
 install:
-  - npm install
+  - yarn install
 script:
   - npm run lint
