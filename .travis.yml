@@ -1,14 +1,28 @@
 language: node_js
 sudo: false
+
 node_js:
   - "8.4.0"
   - "8.3.0"
   - "7.10.1"
   - "6.11.2"
+
 cache:
   yarn: true
   directories:
     - node_modules
+
+services:
+  - mongodb
+  - redis-server
+
+before_install:
+  - echo "replSet = rs0" | sudo tee -a /etc/mongodb.conf
+  - sudo service mongodb restart
+  - sleep 20
+  - mongo --eval 'rs.initiate({_id: "rs0", members: [{_id: 0, host: "127.0.0.1:27017"}]})'
+  - sleep 15
+
 install:
   - yarn install
 script:
