@@ -25,6 +25,7 @@ before_script:
   - sudo rm -rf /var/lib/mongodb/*
 
   # Start up the service using the normal init script
+  - sudo cat /etc/mongodb.conf
   - sleep 20
   - sudo service mongodb restart
 
