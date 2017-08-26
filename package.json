@@ -18,7 +18,7 @@
     "-----Lints-----": "",
     "lint-typescript": "./node_modules/.bin/tslint **/*.ts && tslint --fix **/*.tsx",
     "lint-typescript-fix": "./node_modules/.bin/tslint --fix ./**/*.ts && tslint --fix ./**/*.tsx",
-    "scss-lint": "scss-lint ./styles/*.scss && scss-lint ./styles/**/*.scss",
+    "scss-lint": "./node_modules/.bin/sass-lint -c ./.scss-lint.yml styles/**/*.scss -v -q",
     "lint": "npm run scss-lint&&npm run lint-typescript",
     "-----Production-----": "",
     "serverUp": "node ./dist/server",
