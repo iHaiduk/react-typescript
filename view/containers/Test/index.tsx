@@ -23,12 +23,12 @@ export class Test extends React.Component<IHelloProps, undefined> {
                 {this.props.children}
                 <Header/>
                 <PureComponent tag="main">
-                    Main
+                    Main Test
                     <Link to={"/"}>Home</Link>
                     <Link to={"/test"}>test</Link>
                 </PureComponent>
                 <PureComponent tag="footer">
-                    Footer
+                    Footer Test`
                 </PureComponent>
             </PureComponent>
         );

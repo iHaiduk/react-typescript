@@ -9,7 +9,9 @@ import {LOCATION_CHANGE} from "../store/reducers/routing";
 
 import "./socket";
 
-OfflinePluginRuntime.install();
+if (process.env.NODE_ENV === "production") {
+    OfflinePluginRuntime.install();
+}
 
 const renderApplication = (Component: any) => {
     render(

@@ -35,7 +35,7 @@ This system was created for start any project on NodeJs and React.
 - [koa-router](https://github.com/alexmingoia/koa-router) v7.2.1
 
 ###### DataBase and Memory
-- [mongoose](http://mongoosejs.com) v4.11.7
+- [mongoose](http://mongoosejs.com) v4.11.8
 - [moize](https://github.com/planttheidea/moize) v3.4.0
 
 ###### For user system
@@ -55,7 +55,7 @@ This system was created for start any project on NodeJs and React.
 - [socket.io](https://socket.io) v2.0.3
 - [redux](http://redux.js.org) v3.7.2
 - [React-redux](https://github.com/reactjs/react-redux) v5.0.6
-- [React-router](https://github.com/ReactTraining/react-router) v4.1.2
+- [React-router](https://github.com/ReactTraining/react-router) v4.2.0
 - [React-router-redux](https://github.com/ReactTraining/react-router/tree/master/packages/react-router-redux) v5.0.0-alpha.6
 - [react-helmet](https://github.com/nfl/react-helmet) v5.1.3
 

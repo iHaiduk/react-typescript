@@ -21,7 +21,7 @@ gulp.task('------Development------');
 
 gulp.task('backend', () => {
     try {
-        // gulp.watch('./dist/public/*.svg', { ignoreInitial: false }, ['svgoDev']);
+        gulp.watch('./dist/public/*.svg', { ignoreInitial: false }, ['svgoDev']);
 
         return nodemon({
             script: './dist/server/index.js',
@@ -64,16 +64,25 @@ gulp.task('svgSprite', (callback) => {
 gulp.task('svgoDev', ['svgSprite'], () => {
 
     return gulp.src('./dist/public/*.svg', { ignoreInitial: false })
-        // .pipe(svgo({
-        //     plugins: [
-        //         {removeAttrs: {attrs: ['class', 'fill']}},
-        //         {removeUselessDefs: true},
-        //         {removeDoctype: true},
-        //         {removeStyleElement: true},
-        //         {removeComments: true},
-        //         {cleanupNumericValues: { floatPrecision: 2 }}
-        //     ]
-        // }))
+        .pipe(svgo({
+            plugins: [
+                {removeAttrs: {attrs: ['class', 'fill', 'viewBox']}},
+                {removeUselessDefs: true},
+                {removeDoctype: true},
+                {removeStyleElement: true},
+                {removeComments: true},
+                {cleanupIDs: false},
+                {removeViewBox: true},
+                {removeRasterImages: true},
+                {sortAttrs: true},
+                {mergePaths: true},
+                {removeTitle: true},
+                {removeDesc: true},
+                {removeScriptElement: true},
+                {cleanupNumericValues: { floatPrecision: 3 }},
+                {addAttributesToSVGElement:{attribute: ['viewBox="0 0 24 24"']}}
+            ]
+        }))
         .pipe(gulp.dest('./dist/public'));
 });
 
@@ -146,12 +155,21 @@ gulp.task('svgo', ['cleanStyle'], () => {
     return gulp.src(['./dist/public/*.svg'])
         .pipe(svgo({
             plugins: [
-                {removeAttrs: {attrs: ['class', 'fill']}},
+                {removeAttrs: {attrs: ['class', 'fill', 'viewBox']}},
                 {removeUselessDefs: true},
                 {removeDoctype: true},
                 {removeStyleElement: true},
                 {removeComments: true},
-                {cleanupNumericValues: { floatPrecision: 2 }}
+                {cleanupIDs: false},
+                {removeViewBox: true},
+                {removeRasterImages: true},
+                {sortAttrs: true},
+                {mergePaths: true},
+                {removeTitle: true},
+                {removeDesc: true},
+                {removeScriptElement: true},
+                {cleanupNumericValues: { floatPrecision: 3 }},
+                {addAttributesToSVGElement:{attribute: ['viewBox="0 0 24 24"']}}
             ]
         }))
         .pipe(gulp.dest('./dist/public'));

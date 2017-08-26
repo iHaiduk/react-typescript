@@ -6,6 +6,7 @@ export class IconComponent extends React.PureComponent<IIcon, undefined> {
 
     public static defaultProps: IIcon = {
         name: null,
+        spriteName: "sprite",
         viewBox: "0 0 24 24",
     };
 
@@ -15,9 +16,10 @@ export class IconComponent extends React.PureComponent<IIcon, undefined> {
 
     public async componentDidMount() {
         if (process.env.BROWSER) {
-            const svgContainer = document.getElementById("svgContainer");
-            if (!svgContainer.children.length) {
-                const result = await request({url: "/sprite.svg"});
+            const svgContainer = document.getElementById("svgContainer2");
+            const {spriteName} = this.props;
+            if (svgContainer !== null && !svgContainer.children.length) {
+                const result = await request({url: `/${spriteName}.svg`});
                 svgContainer.innerHTML = result;
             }
         }
