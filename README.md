@@ -1,4 +1,6 @@
 # React TypeScript Isomorphic Starter
+[![Build Status](https://travis-ci.org/iHaiduk/react-typescript.svg?branch=master)](https://travis-ci.org/iHaiduk/react-typescript)
+
 This system was created for start any project on NodeJs and React.
 ### Built using
 #### For styles
@@ -163,7 +165,7 @@ $ npm run lint
 - [x] Tinypng for images
 - [ ] ~~Authorization Token System~~ System has JWT module
 - [ ] Update React to v16
-- [ ] Add pipelines
+- [x] Add pipelines testing [Travis CI](https://travis-ci.org/iHaiduk/react-typescript)
 - [ ] Add testing
 
 Folder Structure Conventions
