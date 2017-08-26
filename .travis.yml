@@ -1,5 +1,5 @@
 language: node_js
-sudo: false
+sudo: true
 
 node_js:
   - "8.4.0"
@@ -18,6 +18,8 @@ services:
 
 before_script:
   - echo "replSet = rs0" | sudo tee -a /etc/mongodb.conf
+  - echo "oplogSize = 250" | sudo tee -a /etc/mongodb.conf
+  - echo "nojournal = true" | sudo tee -a /etc/mongodb.conf
   - sudo service mongodb restart
   - sleep 20
   - mongo --eval "rs.initiate({_id:'rs0',members:[{_id:0,host:'127.0.0.1:27017'}]})"
