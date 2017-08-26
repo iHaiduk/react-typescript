@@ -67,6 +67,10 @@ This system was created for start any project on NodeJs and React.
 ##Production process manager for Node.js
 - [PM2](https://github.com/Unitech/pm2) latest
 
+## Testing system
+- [Jest](https://facebook.github.io/jest/) v20.0.4
+- [TS-Jest](https://github.com/kulshekhar/ts-jest) v20.0.10
+
 --------------------
 --------------------
 
@@ -166,7 +170,7 @@ $ npm run lint
 - [ ] ~~Authorization Token System~~ System has JWT module
 - [ ] Update React to v16
 - [x] Add pipelines testing [Travis CI](https://travis-ci.org/iHaiduk/react-typescript)
-- [ ] Add testing
+- [x] Add testing
 
 Folder Structure Conventions
 ============================ 
