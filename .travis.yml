@@ -15,20 +15,21 @@ services:
   - mongodb
   - redis-server
 
-before_install:
+before_script:
   # Begin modification of the default mongoDB instance
   - echo "replSet = rs0" | sudo tee -a /etc/mongodb.conf
   - echo "oplogSize = 250" | sudo tee -a /etc/mongodb.conf
   - echo "nojournal = true" | sudo tee -a /etc/mongodb.conf
 
   # Wipe out the data directory so we are clean with our configuration
-#  - sudo rm -rf /var/lib/mongodb/*
+  - sudo rm -rf /var/lib/mongodb/*
 
   # Start up the service using the normal init script
-#  - sudo service mongodb start
+  - sleep 20
+  - sudo service mongodb restart
 
   # Create the replicaSet and then wait for it to become clean with a primary and secondary
-before_script:
+#before_script:
   - mongo --eval "rs.initiate({_id:'rs0',members:[{_id:0,host:'127.0.0.1:27017'}]})"
 #  - sleep 5
 
