@@ -26,8 +26,8 @@ before_script:
 
   # Start up the service using the normal init script
   - sudo cat /etc/mongodb.conf
-  - sleep 20
-  - sudo service mongodb restart
+  - sleep 10
+  - service mongodb restart
 
   # Create the replicaSet and then wait for it to become clean with a primary and secondary
 #before_script:
