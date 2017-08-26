@@ -16,7 +16,7 @@ services:
   - mongodb
   - redis-server
 
-before_install:
+before_script:
   - echo "replSet = rs0" | sudo tee -a /etc/mongodb.conf
   - sudo service mongodb restart
   - sleep 20
