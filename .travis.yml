@@ -1,5 +1,6 @@
 language: node_js
-sudo: true
+sudo: false
+group: edge
 
 node_js:
   - "8.4.0"
@@ -11,15 +12,17 @@ cache:
   directories:
     - node_modules
 
+addons:
+  services:
+    - mongod
 services:
-  - mongodb
   - redis-server
 
 before_script:
   # Begin modification of the default mongoDB instance
-  - echo "replSet = rs0" | sudo tee -a /etc/mongodb.conf
-  - echo "oplogSize = 250" | sudo tee -a /etc/mongodb.conf
-  - echo "nojournal = true" | sudo tee -a /etc/mongodb.conf
+  - sudo echo "replSet = rs0" | sudo tee -a /etc/mongodb.conf
+  - sudo echo "oplogSize = 250" | sudo tee -a /etc/mongodb.conf
+  - sudo echo "nojournal = true" | sudo tee -a /etc/mongodb.conf
 
   # Wipe out the data directory so we are clean with our configuration
   - sudo rm -rf /var/lib/mongodb/*
@@ -27,7 +30,7 @@ before_script:
   # Start up the service using the normal init script
   - sudo cat /etc/mongodb.conf
   - sleep 10
-  - service mongodb restart
+  - sudo service mongodb restart
 
   # Create the replicaSet and then wait for it to become clean with a primary and secondary
 #before_script:
