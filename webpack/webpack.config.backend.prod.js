@@ -2,7 +2,7 @@ const fs = require('fs');
 const {resolve} = require('path');
 const webpack = require('webpack');
 const nodeExternals = require('webpack-node-externals');
-const BabiliPlugin = require("babili-webpack-plugin");
+const BabiliPlugin = require("babel-minify-webpack-plugin");
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
