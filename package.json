@@ -16,7 +16,7 @@
     "productionBackend": "cp ./webpack/tsconfigBackend.prod.json tsconfig.json && ./node_modules/.bin/webpack --config ./webpack/webpack.config.backend.prod.js --progress",
     "productionFrontend": "cp ./webpack/tsconfigFrontend.prod.json tsconfig.json && ./node_modules/.bin/webpack --config ./webpack/webpack.config.prod.js --progress",
     "production": "gulp build",
-    "prestart": "npm run production",
+    "build": "npm run production",
     "-----Production-----": "",
     "serverUp": "node ./dist/server",
     "---Production-PM2---": "",
