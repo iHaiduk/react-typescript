@@ -7,7 +7,7 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const SpriteLoaderPlugin = require('svg-sprite-loader/plugin');
 // const OfflinePlugin = require('offline-plugin');
 
-const entry = {
+const entry = process.env.TEMP_NAME ? {bundle: process.env.TEMP_NAME} : {
     bundle: [
         // activate HMR for React
         'react-hot-loader/patch',
@@ -46,6 +46,43 @@ const entry = {
     ],
 };
 
+const plugins = [
+    // new CheckerPlugin(),
+    new webpack.LoaderOptionsPlugin({
+        debug: true,
+        options: {
+            public: true,
+            progress: true,
+            configuration: {
+                devtool: 'sourcemap'
+            }
+        },
+        root: resolve(__dirname, '..')
+    }),
+    new webpack.DefinePlugin({
+        'process.env': {
+            BROWSER: JSON.stringify(true),
+            NODE_ENV: JSON.stringify('development')
+        }
+    }),
+
+    // prints more readable module names in the browser console on HMR updates
+    new webpack.NamedModulesPlugin(),
+    new WebpackErrorNotificationPlugin(),
+    new ExtractTextPlugin("style/[name].css")
+];
+
+if(process.env.TEMP_NAME == undefined) {
+    plugins.push(new webpack.HotModuleReplacementPlugin());
+    plugins.push(new webpack.optimize.CommonsChunkPlugin({
+        name: 'vendor',
+        minChunks: Infinity,
+        filename: 'vendor.js'
+    }));
+    plugins.push(new BellOnBundlerErrorPlugin());
+    plugins.push(new SpriteLoaderPlugin());
+}
+
 fs.readdirSync(resolve(__dirname, "..", "styles")).forEach(file => {
     if(/scss$/i.test(file)) {
         const name = file.replace(/\.scss$/i, '');
@@ -59,7 +96,7 @@ module.exports = {
     target: 'web',
     entry: entry,
     output: {
-        path: resolve(__dirname, '../dist/public'),
+        path: resolve(__dirname, process.env.TEMP_DIR || '../dist/public'),
         filename: '[name].js',
         // necessary for HMR to know where to load the hot update chunks
         publicPath: '/',
@@ -118,43 +155,7 @@ module.exports = {
             "_helpers": resolve(__dirname, '..', 'helpers')
         }
     },
-    plugins: [
-        // new CheckerPlugin(),
-        new webpack.LoaderOptionsPlugin({
-            debug: true,
-            options: {
-                public: true,
-                progress: true,
-                configuration: {
-                    devtool: 'sourcemap'
-                }
-            },
-            root: resolve(__dirname, '..')
-        }),
-        new webpack.DefinePlugin({
-            'process.env': {
-                BROWSER: JSON.stringify(true),
-                NODE_ENV: JSON.stringify('development')
-            }
-        }),
-        // enable HMR globally
-        new webpack.HotModuleReplacementPlugin(),
-
-        // prints more readable module names in the browser console on HMR updates
-        new webpack.NamedModulesPlugin(),
-        new webpack.optimize.CommonsChunkPlugin({
-            name: 'vendor',
-            minChunks: Infinity,
-            filename: 'vendor.js'
-        }),
-
-        // do not emit compiled assets that include errors
-        // new WebpackErrorNotificationPlugin(),
-        new BellOnBundlerErrorPlugin(),
-        new ExtractTextPlugin("style/[name].css"),
-        new SpriteLoaderPlugin(),
-        // new OfflinePlugin()
-    ],
+    plugins: plugins,
     module: {
         // loaders -> rules in webpack 2
         rules: [

@@ -25,6 +25,9 @@
       "_config": [
         "./server/config"
       ],
+      "_helpers/*": [
+        "./helpers/*"
+      ],
       "_components/*": [
         "./view/components/*"
       ],

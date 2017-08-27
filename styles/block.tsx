@@ -1,7 +1,7 @@
 import * as React from "react";
 import {Helmet} from "react-helmet";
 
-const ASSETS: any = process.env.BROWSER ? (window as any).ASSETS : require("_config").ASSETS;
+const ASSETS: any = (process.env.BROWSER ? (window as any).ASSETS : require("_config").ASSETS) || {};
 
 declare interface IBlock {
     header: string;

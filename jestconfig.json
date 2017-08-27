@@ -1,9 +1,4 @@
 {
-  "globals": {
-    "ts-jest": {
-      "tsConfigFile": "webpack/tsconfigFrontend.json"
-    }
-  },
   "cacheDirectory": "./.gulp/jest",
   "transform": {
     "\\.(ts|tsx)$": "./node_modules/ts-jest/preprocessor.js"

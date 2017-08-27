@@ -39,5 +39,4 @@ export class Home extends React.Component<IHelloProps, undefined> {
         );
     }
 }
-
 export default Home;

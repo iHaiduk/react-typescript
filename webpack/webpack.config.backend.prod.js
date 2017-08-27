@@ -56,7 +56,8 @@ module.exports = {
             "_images": resolve(__dirname, '..', 'static/images'),
             "_stylesLoad": resolve(__dirname, '..', 'styles'),
             "_style": resolve(__dirname, '..', 'styles/index.ts'),
-            "_server": resolve(__dirname, '..', 'server')
+            "_server": resolve(__dirname, '..', 'server'),
+            "_helpers": resolve(__dirname, '..', 'helpers')
         }
     },
     node: {
@@ -192,6 +193,7 @@ module.exports = {
                 exclude: /node_modules/,
                 include: [
                     resolve(__dirname, '..', 'server'),
+                    resolve(__dirname, '..', 'helpers'),
                     resolve(__dirname, '..', 'route'),
                     resolve(__dirname, '..', 'store'),
                     resolve(__dirname, '..', 'styles'),

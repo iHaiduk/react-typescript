@@ -21,6 +21,7 @@
       "_actions":         ["./store/actions/index"],
       "_blocks/*":        ["./view/block/*"],
       "_config":          ["./server/config"],
+      "_helpers/*":       ["./helpers/*"],
       "_components/*":    ["./view/components/*"],
       "_containers/*":    ["./view/containers/*"],
       "_reducers":        ["./store/reducers/index"],
@@ -36,6 +37,7 @@
   },
   "include": [
     "./client/**/*",
+    "./helpers/**/*",
     "./route/**/*",
     "./store/**/*",
     "./styles/**/*",

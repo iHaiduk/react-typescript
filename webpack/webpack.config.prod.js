@@ -9,7 +9,7 @@ const OfflinePlugin = require('offline-plugin');
 const ManifestPlugin = require('webpack-manifest-plugin');
 const SpriteLoaderPlugin = require('svg-sprite-loader/plugin');
 
-const entry = {
+const entry = process.env.TEMP_NAME ? {bundle: process.env.TEMP_NAME} : {
     bundle: './client/index.tsx',
     vendor: [
         'react',
@@ -45,6 +45,81 @@ fs.readdirSync(resolve(__dirname, "..", "styles")).forEach(file => {
         excludes_offline.push(name + ".js*")
     }
 });
+
+const plugins = [
+    new webpack.LoaderOptionsPlugin({
+        minimize: true,
+        debug: false,
+        root: resolve(__dirname, '..')
+    }),
+    new webpack.DefinePlugin({
+        'process.env': {
+            BROWSER: JSON.stringify(true),
+            NODE_ENV: JSON.stringify('production'),
+            WEB: JSON.stringify('production')
+        }
+    }),
+
+    new webpack.optimize.UglifyJsPlugin({
+        minimize: true,
+        beautify: false,
+        sourcemap: false,
+        comments: false,
+        mangle: {
+            except: [
+                '$', 'webpackJsonp'
+            ],
+            screw_ie8: true,
+            keep_fnames: true
+        },
+        compress: {
+            warnings: false,
+            screw_ie8: true,
+            conditionals: true,
+            unused: true,
+            comparisons: true,
+            sequences: true,
+            dead_code: true,
+            evaluate: true,
+            if_return: true,
+            join_vars: true,
+            drop_console: true
+        },
+        output: {
+            comments: false,
+            screw_ie8: true
+        }
+    }),
+
+    new ExtractTextPlugin("style/[name].css?[hash]")
+];
+
+if(process.env.TEMP_NAME == undefined) {
+    plugins.push(new CleanWebpackPlugin(['./dist/public/'], {
+        root: resolve(__dirname, '..'),
+        verbose: true,
+    }));
+    plugins.push(new webpack.NoEmitOnErrorsPlugin());
+    plugins.push(new webpack.optimize.OccurrenceOrderPlugin());
+    plugins.push(new webpack.optimize.CommonsChunkPlugin({
+        name: 'vendor',
+        minChunks: Infinity,
+        filename: 'vendor.js?[hash]'
+    }));
+    plugins.push(new WebpackErrorNotificationPlugin());
+    plugins.push(new BellOnBundlerErrorPlugin());
+    plugins.push(new OfflinePlugin({
+        excludes: excludes_offline,
+        responseStrategy: 'network-first',
+        ServiceWorker: {
+            minify: true
+        }
+    }));
+    plugins.push(new ManifestPlugin({
+        fileName: "../server/manifest.json"
+    }),);
+    plugins.push(new SpriteLoaderPlugin());
+}
 
 module.exports = {
     // To enhance the debugging process. More info: https://webpack.js.org/configuration/devtool/
@@ -82,84 +157,11 @@ module.exports = {
             "_static": resolve(__dirname, '..', 'static'),
             "_images": resolve(__dirname, '..', 'static/images'),
             "_stylesLoad": resolve(__dirname, '..', 'styles'),
-            "_style": resolve(__dirname, '..', 'styles/index.ts')
+            "_style": resolve(__dirname, '..', 'styles/index.ts'),
+            "_helpers": resolve(__dirname, '..', 'helpers')
         }
     },
-    plugins: [
-        new CleanWebpackPlugin(['./dist/public/'], {
-            root: resolve(__dirname, '..'),
-            verbose: true,
-        }),
-        new webpack.LoaderOptionsPlugin({
-            minimize: true,
-            debug: false,
-            root: resolve(__dirname, '..')
-        }),
-        new webpack.DefinePlugin({
-            'process.env': {
-                BROWSER: JSON.stringify(true),
-                NODE_ENV: JSON.stringify('production'),
-                WEB: JSON.stringify('production')
-            }
-        }),
-
-        // do not emit compiled assets that include errors
-        new webpack.NoEmitOnErrorsPlugin(),
-        new webpack.optimize.OccurrenceOrderPlugin(),
-
-        // new webpack.optimize.UglifyJsPlugin(),
-
-        new webpack.optimize.UglifyJsPlugin({
-            minimize: true,
-            beautify: false,
-            sourcemap: false,
-            comments: false,
-            mangle: {
-                except: [
-                    '$', 'webpackJsonp'
-                ],
-                screw_ie8: true,
-                keep_fnames: true
-            },
-            compress: {
-                warnings: false,
-                screw_ie8: true,
-                conditionals: true,
-                unused: true,
-                comparisons: true,
-                sequences: true,
-                dead_code: true,
-                evaluate: true,
-                if_return: true,
-                join_vars: true,
-                drop_console: true
-            },
-            output: {
-                comments: false,
-                screw_ie8: true
-            }
-        }),
-
-        new webpack.optimize.CommonsChunkPlugin({
-            name: 'vendor',
-            minChunks: Infinity,
-            filename: 'vendor.js?[hash]'
-        }),
-        new WebpackErrorNotificationPlugin(),
-        new BellOnBundlerErrorPlugin(),
-        new ExtractTextPlugin("style/[name].css?[hash]"),
-        new OfflinePlugin({
-            excludes: excludes_offline,
-            responseStrategy: 'network-first',
-            ServiceWorker: {
-                minify: true
-            }
-        }),
-        new ManifestPlugin({
-            fileName: "../server/manifest.json"
-        }),
-        new SpriteLoaderPlugin(),
-    ],
+    plugins: plugins,
     module: {
         rules: [
             {
@@ -276,6 +278,7 @@ module.exports = {
                 exclude: /node_modules/,
                 include: [
                     resolve(__dirname, '..', 'client'),
+                    resolve(__dirname, '..', 'helpers'),
                     resolve(__dirname, '..', 'route'),
                     resolve(__dirname, '..', 'store'),
                     resolve(__dirname, '..', 'styles'),

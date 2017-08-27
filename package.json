@@ -1,6 +1,6 @@
 {
-  "name": "miraries",
-  "version": "0.0.1",
+  "name": "react-typescript",
+  "version": "1.0.0",
   "description": "Project for writers",
   "main": "index.js",
   "author": {
@@ -13,8 +13,8 @@
     "-----Development-----": "",
     "dev-server": "cp ./webpack/tsconfigFrontend.json tsconfig.json && ./node_modules/.bin/webpack-dev-server --colors --inline --watch --config ./webpack/webpack.config.dev.js",
     "backend-watch": "cp ./webpack/tsconfigBackend.json tsconfig.json && ./node_modules/.bin/webpack --config ./webpack/webpack.config.backend.dev.js",
-    "productionBackend": "cp ./webpack/tsconfigBackend.prod.json tsconfig.json && ./node_modules/.bin/webpack --config ./webpack/webpack.config.backend.prod.js",
-    "productionFrontend": "cp ./webpack/tsconfigFrontend.prod.json tsconfig.json && ./node_modules/.bin/webpack --config ./webpack/webpack.config.prod.js",
+    "productionBackend": "cp ./webpack/tsconfigBackend.prod.json tsconfig.json && ./node_modules/.bin/webpack --config ./webpack/webpack.config.backend.prod.js --progress",
+    "productionFrontend": "cp ./webpack/tsconfigFrontend.prod.json tsconfig.json && ./node_modules/.bin/webpack --config ./webpack/webpack.config.prod.js --progress",
     "production": "gulp build",
     "-----Production-----": "",
     "serverUp": "node ./dist/server",
@@ -30,7 +30,7 @@
     "scss-lint": "./node_modules/.bin/sass-lint -c ./.scss-lint.yml styles/**/*.scss -v -q",
     "lint": "npm run scss-lint&&npm run lint-typescript",
     "-----Test-----": "",
-    "test": "./node_modules/.bin/jest --config=jestconfig.json",
+    "test": "./node_modules/.bin/jest --config=jestconfig.json -u --notify",
     "-----Other-----": "",
     "clean-cache": "rm -rf ./.awcache/",
     "clean-build": "rm -rf ./dist/"
@@ -129,6 +129,8 @@
     "gulp-tinypng": "https://github.com/iHaiduk/gulp-tinypng",
     "gulp-watch": "^4.3.11",
     "jest": "^20.0.4",
+    "jest-alias-preprocessor": "^1.1.1",
+    "jest-webpack-alias": "^3.3.3",
     "node-sass": "^4.5.3",
     "nodemon": "^1.11.0",
     "normalize-scss": "^7.0.0",
