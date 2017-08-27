@@ -94,7 +94,7 @@ const plugins = [
     new ExtractTextPlugin("style/[name].css?[hash]")
 ];
 
-if(process.env.TEMP_NAME == undefined) {
+if(process.env.TEMP_NAME === undefined) {
     plugins.push(new CleanWebpackPlugin(['./dist/public/'], {
         root: resolve(__dirname, '..'),
         verbose: true,
@@ -122,20 +122,16 @@ if(process.env.TEMP_NAME == undefined) {
 }
 
 module.exports = {
-    // To enhance the debugging process. More info: https://webpack.js.org/configuration/devtool/
     devtool: false,
     target: 'web',
     entry: entry,
     output: {
         path: resolve(__dirname, '../dist/public'),
-        // necessary for HMR to know where to load the hot update chunks
         publicPath: '/',
         libraryTarget: 'umd',
-        filename: '[name].js?[hash]', // string
-        // the filename template for entry chunks
+        filename: '[name].js?[hash]',
         sourceMapFilename: '[name].js.map?[hash]',
         chunkFilename: '[name].[hash:4].js',
-        // libraryTarget: 'umd'
         jsonpFunction: '$'
     },
 
@@ -183,7 +179,6 @@ module.exports = {
                             {
                                 loader: "sass-loader", options: {
                                 sourceMap: false,
-                                // indentedSyntax: true,
                                 modules: true,
                             }
                             },
@@ -239,40 +234,9 @@ module.exports = {
                 ],
                 include: resolve('./static/images')
             },
-            // Once TypeScript is configured to output source maps we need to tell webpack
-            // to extract these source maps and pass them to the browser,
-            // this way we will get the source file exactly as we see it in our code editor.
-            // {
-            //     enforce: 'pre',
-            //     test: /\.js$/,
-            //     loader: 'source-map-loader',
-            //     exclude: '/node_modules/'
-            // },
-            // {
-            //     enforce: 'pre',
-            //     test: /\.tsx?$/,
-            //     use: "source-map-loader",
-            //     exclude: '/node_modules/'
-            // },
-            // All files with a '.ts' or '.tsx' extension will be handled by 'ts-loader'.
             {
                 test: /\.ts(x?)$/,
                 use: [
-                    // {
-                    //     loader: 'babel-loader',
-                    //     query: {
-                    //         presets: ["react-optimize", "stage-0"],
-                    //         plugins: ['transform-react-remove-prop-types']
-                    //     }
-                    // },
-                    // {
-                    //     loader: 'string-replace-loader',
-                    //     options: {
-                    //         search: '_import',
-                    //         replace: 'import',
-                    //         flags: 'ig'
-                    //     }
-                    // },
                     {loader: 'awesome-typescript-loader'}
                 ],
                 exclude: /node_modules/,

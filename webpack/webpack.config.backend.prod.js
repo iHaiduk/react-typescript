@@ -2,8 +2,6 @@ const fs = require('fs');
 const {resolve} = require('path');
 const webpack = require('webpack');
 const nodeExternals = require('webpack-node-externals');
-const WebpackErrorNotificationPlugin = require('webpack-error-notification');
-const BellOnBundlerErrorPlugin = require('bell-on-bundler-error-plugin');
 const BabiliPlugin = require("babili-webpack-plugin");
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 
@@ -24,14 +22,12 @@ fs.readdirSync(resolve(__dirname, "..", "styles")).forEach(file => {
 const assets = fs.readFileSync(resolve(__dirname, "..", "dist", "server", "manifest.json"), "utf-8");
 
 module.exports = {
-    // To enhance the debugging process. More info: https://webpack.js.org/configuration/devtool/
     devtool: 'sourcemap',
     target: 'node',
     entry: entry,
     output: {
         path: resolve(__dirname, '../dist/server'),
         filename: '[name].js',
-        // necessary for HMR to know where to load the hot update chunks
         publicPath: '/',
         chunkFilename: '[name]-[id].js',
         libraryTarget: 'commonjs2'
@@ -168,9 +164,6 @@ module.exports = {
                 ],
                 include: resolve('./static/images')
             },
-            // Once TypeScript is configured to output source maps we need to tell webpack
-            // to extract these source maps and pass them to the browser,
-            // this way we will get the source file exactly as we see it in our code editor.
             {
                 enforce: 'pre',
                 test: /\.js$/,
@@ -183,11 +176,9 @@ module.exports = {
                 use: "source-map-loader",
                 exclude: '/node_modules/'
             },
-            // All files with a '.ts' or '.tsx' extension will be handled by 'ts-loader'.
             {
                 test: /\.ts(x?)$/,
                 use: [
-                    // {loader: 'react-hot-loader/webpack'},
                     {loader: 'awesome-typescript-loader'}
                 ],
                 exclude: /node_modules/,

@@ -4,7 +4,6 @@ const webpack = require('webpack');
 const nodeExternals = require('webpack-node-externals');
 const WebpackErrorNotificationPlugin = require('webpack-error-notification');
 const BellOnBundlerErrorPlugin = require('bell-on-bundler-error-plugin');
-const BabiliPlugin = require("babili-webpack-plugin");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const SpriteLoaderPlugin = require('svg-sprite-loader/plugin');
 
@@ -23,7 +22,6 @@ fs.readdirSync(resolve(__dirname, "..", "styles")).forEach(file => {
 });
 
 module.exports = {
-    // To enhance the debugging process. More info: https://webpack.js.org/configuration/devtool/
     devtool: 'sourcemap',
     target: 'node',
     watch: true,
@@ -35,7 +33,6 @@ module.exports = {
     output: {
         path: resolve(__dirname, '../dist/server'),
         filename: '[name].js',
-        // necessary for HMR to know where to load the hot update chunks
         publicPath: '/',
         chunkFilename: '[name]-[id].js',
         libraryTarget: 'commonjs2'
@@ -74,7 +71,6 @@ module.exports = {
         setImmediate: true
     },
     plugins: [
-        // new CheckerPlugin(),
         new webpack.LoaderOptionsPlugin({
             debug: true,
             options: {
@@ -90,11 +86,7 @@ module.exports = {
             'process.env.BROWSER': JSON.stringify(false),
             'process.env.ASSETS': JSON.stringify({})
         }),
-
-        // prints more readable module names in the browser console on HMR updates
         new webpack.NamedModulesPlugin(),
-
-        // do not emit compiled assets that include errors
         new WebpackErrorNotificationPlugin(),
         new BellOnBundlerErrorPlugin(),
         new ExtractTextPlugin("../public/style/[name].css"),
@@ -173,9 +165,6 @@ module.exports = {
                 ],
                 include: resolve('./static/images')
             },
-            // Once TypeScript is configured to output source maps we need to tell webpack
-            // to extract these source maps and pass them to the browser,
-            // this way we will get the source file exactly as we see it in our code editor.
             {
                 enforce: 'pre',
                 test: /\.js$/,
@@ -188,11 +177,9 @@ module.exports = {
                 use: "source-map-loader",
                 exclude: '/node_modules/'
             },
-            // All files with a '.ts' or '.tsx' extension will be handled by 'ts-loader'.
             {
                 test: /\.ts(x?)$/,
                 use: [
-                    // {loader: 'react-hot-loader/webpack'},
                     {loader: 'awesome-typescript-loader'}
                 ],
                 exclude: /node_modules/,

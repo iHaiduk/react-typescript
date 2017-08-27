@@ -5,7 +5,6 @@ const WebpackErrorNotificationPlugin = require('webpack-error-notification');
 const BellOnBundlerErrorPlugin = require('bell-on-bundler-error-plugin');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const SpriteLoaderPlugin = require('svg-sprite-loader/plugin');
-// const OfflinePlugin = require('offline-plugin');
 
 const entry = process.env.TEMP_NAME ? {bundle: process.env.TEMP_NAME} : {
     bundle: [
@@ -47,7 +46,6 @@ const entry = process.env.TEMP_NAME ? {bundle: process.env.TEMP_NAME} : {
 };
 
 const plugins = [
-    // new CheckerPlugin(),
     new webpack.LoaderOptionsPlugin({
         debug: true,
         options: {
@@ -66,13 +64,12 @@ const plugins = [
         }
     }),
 
-    // prints more readable module names in the browser console on HMR updates
     new webpack.NamedModulesPlugin(),
     new WebpackErrorNotificationPlugin(),
     new ExtractTextPlugin("style/[name].css")
 ];
 
-if(process.env.TEMP_NAME == undefined) {
+if(process.env.TEMP_NAME === undefined) {
     plugins.push(new webpack.HotModuleReplacementPlugin());
     plugins.push(new webpack.optimize.CommonsChunkPlugin({
         name: 'vendor',
@@ -91,41 +88,32 @@ fs.readdirSync(resolve(__dirname, "..", "styles")).forEach(file => {
 });
 
 module.exports = {
-    // To enhance the debugging process. More info: https://webpack.js.org/configuration/devtool/
     devtool: 'sourcemap',
     target: 'web',
     entry: entry,
     output: {
         path: resolve(__dirname, process.env.TEMP_DIR || '../dist/public'),
         filename: '[name].js',
-        // necessary for HMR to know where to load the hot update chunks
         publicPath: '/',
         chunkFilename: '[name]-[id].js',
         libraryTarget: 'umd'
     },
 
     devServer: {
-        // All options here: https://webpack.js.org/configuration/dev-server/
-
-        // enable HMR on the server
         hot: true,
-        // match the output path
         proxy: {
             '*': 'http://0.0.0.0:' + (process.env.PORT || 1337),
             ws: true
         },
-        // match the output `publicPath`
-        publicPath: '/',
 
-        // Enable to integrate with Docker
+        publicPath: '/',
         host: "0.0.0.0",
 
         port: 3000,
         historyApiFallback: true,
-        // All the stats options here: https://webpack.js.org/configuration/stats/
         stats: {
-            colors: true, // color is life
-            chunks: false, // this reduces the amount of stuff I see in my terminal; configure to your needs
+            colors: true,
+            chunks: false,
         },
         compress: true,
         disableHostCheck: true,
@@ -230,9 +218,6 @@ module.exports = {
                 ],
                 include: resolve('./static/images')
             },
-            // Once TypeScript is configured to output source maps we need to tell webpack
-            // to extract these source maps and pass them to the browser,
-            // this way we will get the source file exactly as we see it in our code editor.
             {
                 enforce: 'pre',
                 test: /\.js$/,
@@ -245,25 +230,10 @@ module.exports = {
                 use: "source-map-loader",
                 exclude: /node_modules|styles/,
             },
-            // All files with a '.ts' or '.tsx' extension will be handled by 'ts-loader'.
             {
                 test: /\.ts(x?)$/,
                 use: [
                     {loader: 'react-hot-loader/webpack'},
-                    // {
-                    //     loader: 'babel-loader',
-                    //     query: {
-                    //         presets: ['es2015', 'stage-0']
-                    //     }
-                    // },
-                    // {
-                    //     loader: 'string-replace-loader',
-                    //     options: {
-                    //         search: '_import',
-                    //         replace: 'import',
-                    //         flags: 'ig'
-                    //     }
-                    // },
                     {loader: 'awesome-typescript-loader'}
                 ],
                 exclude: /node_modules/,

@@ -176,6 +176,7 @@ Folder Structure Conventions
 ============================ 
     .
     ├── .awcache                # Cached build files
+    ├── __tests__               # Folder with test files
     ├── client                  # Client load application
     ├── dist                    # Compiled files
     ├── route                   # Files for routing application
@@ -191,6 +192,7 @@ Folder Structure Conventions
     ├── .travis.yml             # Config file for Travis CI
     ├── ecosystem.json          # Config file for PM2
     ├── gulpfile.js
+    ├── jestconfig.json         # Config file for Jest
     ├── package.json
     ├── README.md
     ├── tsconfig.json
