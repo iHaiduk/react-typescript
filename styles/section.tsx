@@ -14,13 +14,14 @@ export const sectionStyle = (Elem: any): any => {
     return class SectionStyle extends React.Component {
 
         public render() {
+            const {children, ...other} = this.props;
             return (
-                <Elem>
-                    {this.props.children}
+                <Elem {...other}>
                     <Helmet>
                         <link href={`/${ASSETS["base.css"] || "style/base.css"}`} media="all" rel="stylesheet" />
                         <link href={`/${ASSETS["section.css"] || "style/section.css"}`} media="all" rel="stylesheet" />
                     </Helmet>
+                    {children}
                 </Elem>
             );
         }

@@ -14,12 +14,13 @@ export const blockStyle = (Elem: any): any => {
     return class BlockStyle extends React.Component {
 
         public render() {
+            const {children, ...other} = this.props;
             return (
-                <Elem>
-                    {this.props.children}
+                <Elem {...other}>
                     <Helmet>
                         <link href={`/${ASSETS["block.css"] || "style/block.css"}`} media="all" rel="stylesheet" />
                     </Helmet>
+                    {children}
                 </Elem>
             );
         }
