@@ -16,7 +16,7 @@ export class IconComponent extends React.PureComponent<IIcon, undefined> {
 
     public async componentDidMount() {
         if (process.env.BROWSER) {
-            const svgContainer = document.getElementById("svgContainer2");
+            const svgContainer = document.getElementById("svgContainer");
             const {spriteName} = this.props;
             if (svgContainer !== null && !svgContainer.children.length) {
                 const result = await request({url: `/${spriteName}.svg`});
@@ -36,3 +36,5 @@ export class IconComponent extends React.PureComponent<IIcon, undefined> {
         );
     }
 }
+
+export default IconComponent;
