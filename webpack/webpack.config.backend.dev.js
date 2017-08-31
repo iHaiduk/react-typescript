@@ -110,15 +110,9 @@ module.exports = {
                             },
                             'group-css-media-queries-loader',
                             {
-                                loader: "sass-loader", options: {
-                                sourceMap: true,
-                                // indentedSyntax: true,
-                                modules: true,
-                            }
-                            },
-                            {
                                 loader: 'postcss-loader',
                                 options: {
+                                    sourceMap: true,
                                     plugins: (loader) => [
                                         require('autoprefixer')({
                                             browsers: [
@@ -130,6 +124,13 @@ module.exports = {
                                             cascade: false
                                         })
                                     ]
+                                }
+                            },
+                            {
+                                loader: "sass-loader", options: {
+                                    sourceMap: true,
+                                    // indentedSyntax: true,
+                                    modules: true,
                                 }
                             }
                         ]

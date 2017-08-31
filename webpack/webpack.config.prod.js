@@ -177,14 +177,9 @@ module.exports = {
                             },
                             'group-css-media-queries-loader',
                             {
-                                loader: "sass-loader", options: {
-                                sourceMap: false,
-                                modules: true,
-                            }
-                            },
-                            {
                                 loader: 'postcss-loader',
                                 options: {
+                                    sourceMap: false,
                                     plugins: (loader) => [
                                         require('autoprefixer')({
                                             browsers: [
@@ -199,6 +194,12 @@ module.exports = {
                                             preset: 'advanced',
                                         })
                                     ]
+                                }
+                            },
+                            {
+                                loader: "sass-loader", options: {
+                                    sourceMap: false,
+                                    modules: true,
                                 }
                             }
                         ]
