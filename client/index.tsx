@@ -1,5 +1,5 @@
 import App from "_route";
-import store, {history} from "_store";
+import createStoreWithMiddleware, {action, history} from "_store";
 import * as OfflinePluginRuntime from "offline-plugin/runtime";
 import * as React from "react";
 import {render} from "react-dom";
@@ -13,22 +13,22 @@ if (process.env.NODE_ENV === "production") {
     OfflinePluginRuntime.install();
 }
 
-const renderApplication = (Component: any) => {
+const store = createStoreWithMiddleware();
+
+const renderApplication = () => {
     render(
         <AppContainer>
             <Provider store={store}>
-                <Component history={history} {...history}/>
+                <App history={history} {...history}/>
             </Provider>
         </AppContainer>,
-        // HTML root element for React app
         document.getElementById("application"),
     );
 };
-renderApplication(App);
+
+renderApplication();
+store.subscribe(renderApplication);
 
 history.listen((location: any) => {
-    store.dispatch({
-        payload: {location: location.pathname},
-        type: LOCATION_CHANGE,
-    });
+    action(LOCATION_CHANGE, {location: location.pathname});
 });

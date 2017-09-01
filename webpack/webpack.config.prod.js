@@ -19,11 +19,9 @@ const entry = process.env.TEMP_NAME ? {bundle: process.env.TEMP_NAME} : {
         'react-hot-loader',
         'react-router',
         'react-router-dom',
-        'react-router-redux',
 
         'redux',
-        "redux-thunk",
-        "redux-promise-middleware",
+        'redux-saga',
 
         "history",
         'immutable',
