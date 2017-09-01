@@ -8,11 +8,11 @@ This system was created for start any project on NodeJs and React.
 - [SCSS](http://sass-lang.com) + [sass-loader](https://github.com/webpack-contrib/sass-loader) v6.0.6
 - [Bemify](https://github.com/franzheidl/bemify) v0.1.2
 - [normalize-scss](https://github.com/JohnAlbin/normalize-scss) v7.0.0
-- [autoprefixer](https://github.com/postcss/autoprefixer) v7.1.2
+- [autoprefixer](https://github.com/postcss/autoprefixer) v7.1.3
 - [cssnano](http://cssnano.co) v3.10.0 (only Environment production)
 ---------------
 #### For frontend side
-- [TypeScript](https://www.typescriptlang.org) v2.5.0-dev.20170803 + [awesome-typescript-loader](https://github.com/s-panferov/awesome-typescript-loader) v3.2.3
+- [TypeScript](https://www.typescriptlang.org) v2.5.2 + [awesome-typescript-loader](https://github.com/s-panferov/awesome-typescript-loader) v3.2.3
 - [React](https://facebook.github.io/react/) v15.6.1
 - [redux](http://redux.js.org) v3.7.2
 - [Webpack](https://webpack.github.io) v3.5.5
@@ -31,13 +31,13 @@ This system was created for start any project on NodeJs and React.
 - [babel-plugin-dynamic-import-webpack](https://github.com/airbnb/babel-plugin-dynamic-import-webpack) v1.0.1
 ---------------
 #### For backend side
-- [TypeScript](https://www.typescriptlang.org) v2.5.0-dev.20170803
+- [TypeScript](https://www.typescriptlang.org) v2.5.2
 - [React](https://facebook.github.io/react/) v15.6.1
 - [Koa](http://koajs.com) v2.3.0
 - [koa-router](https://github.com/alexmingoia/koa-router) v7.2.1
 
 ###### DataBase and Memory
-- [mongoose](http://mongoosejs.com) v4.11.8
+- [mongoose](http://mongoosejs.com) v4.11.9
 - [moize](https://github.com/planttheidea/moize) v3.4.0
 
 ###### For user system
@@ -45,7 +45,7 @@ This system was created for start any project on NodeJs and React.
 - [jsonwebtoken](https://jwt.io/) v7.4.2
 
 ###### For SVG
-- [svg-sprite-loader](https://github.com/kisenka/svg-sprite-loader) v3.2.4
+- [svg-sprite-loader](https://github.com/kisenka/svg-sprite-loader) v3.2.5
 - [gulp-svgo](https://github.com/corneliusio/gulp-svgo) v1.2.5
 
 ###### Logging
@@ -59,7 +59,7 @@ This system was created for start any project on NodeJs and React.
 - [React-redux](https://github.com/reactjs/react-redux) v5.0.6
 - [React-router](https://github.com/ReactTraining/react-router) v4.2.0
 - [React-router-redux](https://github.com/ReactTraining/react-router/tree/master/packages/react-router-redux) v5.0.0-alpha.6
-- [react-helmet](https://github.com/nfl/react-helmet) v5.1.3
+- [react-helmet](https://github.com/nfl/react-helmet) v5.2.0
 
 ##Progressive Web App
 - [offline-plugin](https://github.com/NekR/offline-plugin) v3.1.4
@@ -69,7 +69,7 @@ This system was created for start any project on NodeJs and React.
 
 ## Testing system
 - [Jest](https://facebook.github.io/jest/) v20.0.4
-- [TS-Jest](https://github.com/kulshekhar/ts-jest) v20.0.10
+- [TS-Jest](https://github.com/kulshekhar/ts-jest) v20.0.14
 
 --------------------
 --------------------
