@@ -4,52 +4,83 @@
     "outDir": "./dist/",
     "sourceMap": true,
     "noImplicitAny": true,
-    "module": "esnext",
-    "target": "es2015",
-    "lib": [ "es2015", "es2015.promise", "dom" ],
+    "module": "commonjs",
     "moduleResolution": "node",
+    "target": "es2015",
     "importHelpers": true,
     "jsx": "react",
     "baseUrl": "./",
-    "allowSyntheticDefaultImports": true,
     "removeComments": false,
     "allowUnusedLabels": false,
     "noImplicitThis": true,
     "noUnusedLocals": true,
     "noUnusedParameters": false,
     "paths": {
-      "_actions":         ["./store/actions/index"],
-      "_blocks/*":        ["./view/block/*"],
-      "_components/*":    ["./view/components/*"],
-      "_containers/*":    ["./view/containers/*"],
-      "_helpers/*":       ["./helpers/*"],
-      "_reducers":        ["./store/reducers/index"],
-      "_route":           ["./route/index"],
-      "_store":           ["./store/index"],
-      "_static/*":        ["./static/*"],
-      "_images/*":        ["./static/images/*"],
-      "_stylesLoad/*":    ["./styles/*"],
-      "_style":           ["./styles/index"]
+      "_actions": [
+        "./store/actions/index"
+      ],
+      "_blocks/*": [
+        "./view/block/*"
+      ],
+      "_config": [
+        "./server/config"
+      ],
+      "_helpers/*": [
+        "./helpers/*"
+      ],
+      "_components/*": [
+        "./view/components/*"
+      ],
+      "_containers/*": [
+        "./view/containers/*"
+      ],
+      "_models": [
+        "./server/db/models"
+      ],
+      "_reducers": [
+        "./store/reducers/index"
+      ],
+      "_route": [
+        "./route/index"
+      ],
+      "_store": [
+        "./store/index"
+      ],
+      "_static/*": [
+        "./static/*"
+      ],
+      "_images/*": [
+        "./static/images/*"
+      ],
+      "_stylesLoad/*": [
+        "./styles/*"
+      ],
+      "_style": [
+        "./styles/index"
+      ],
+      "_server/*": [
+        "./server/*"
+      ]
     },
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true
   },
   "include": [
-    "./client/**/*",
+    "./server/**/*",
     "./route/**/*",
     "./helpers/**/*",
-    "./store/**/*",
     "./static/**/*",
+    "./store/**/*",
     "./styles/**/*",
     "./view/**/*"
   ],
   "awesomeTypescriptLoaderOptions": {
     "forkChecker": true,
-    "useWebpackText": false,
+    "useWebpackText": true,
+    "useBabel": true,
     "useCache": true,
     "cacheDirectory": ".gulp/ts",
-    "useTranspileModule": true,
-    "silent": true
+    "useTranspileModule": true
   },
   "compileOnSave": false,
   "buildOnSave": false

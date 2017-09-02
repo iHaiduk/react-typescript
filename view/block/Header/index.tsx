@@ -1,5 +1,6 @@
 import {PureComponent} from "_components/PureComponent";
-import {blockStyle, block, section} from "_style";
+import {block, blockStyle, section} from "_style";
+import {List} from "immutable";
 import * as React from "react";
 import {IHeader} from "./interface";
 
@@ -7,8 +8,9 @@ import {IHeader} from "./interface";
 export class Header extends React.Component<IHeader, undefined> {
 
     public render() {
+        const styleList = List([section.get("section"), block.get("header")]).toJS();
         return (
-            <PureComponent tag="header" className={[section.section, block.header]}>
+            <PureComponent tag="header" className={styleList}>
                 {this.props.children}
                 Header
             </PureComponent>

@@ -1,4 +1,6 @@
 # React TypeScript Isomorphic Starter
+with [Saga v0.15.6](https://github.com/redux-saga/redux-saga/) + [Immutable v3.8.1](https://facebook.github.io/immutable-js/)
+
 [![Build Status](https://travis-ci.org/iHaiduk/react-typescript.svg?branch=master)](https://travis-ci.org/iHaiduk/react-typescript) [![dependencies Status](https://david-dm.org/iHaiduk/react-typescript/status.svg)](https://david-dm.org/iHaiduk/react-typescript)
 
 This system was created for start any project on NodeJs and React.
