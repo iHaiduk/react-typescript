@@ -1,4 +1,6 @@
 # React TypeScript Isomorphic Starter
+with [redux-thunk v2.2.0](https://github.com/gaearon/redux-thunk) + [redux-promise-middleware v4.4.1](https://github.com/pburtchaell/redux-promise-middleware)
+
 [![Build Status](https://travis-ci.org/iHaiduk/react-typescript.svg?branch=master)](https://travis-ci.org/iHaiduk/react-typescript) [![dependencies Status](https://david-dm.org/iHaiduk/react-typescript/status.svg)](https://david-dm.org/iHaiduk/react-typescript)
 
 This system was created for start any project on NodeJs and React.
