@@ -1,5 +1,5 @@
 # React TypeScript Isomorphic Starter
-with [redux-thunk v2.2.0](https://github.com/gaearon/redux-thunk) + [redux-promise-middleware v4.4.1](https://github.com/pburtchaell/redux-promise-middleware)
+with [rxjs v5.4.3](http://reactivex.io) + [Immutable v3.8.1](https://facebook.github.io/immutable-js/)
 
 [![Build Status](https://travis-ci.org/iHaiduk/react-typescript.svg?branch=master)](https://travis-ci.org/iHaiduk/react-typescript) [![dependencies Status](https://david-dm.org/iHaiduk/react-typescript/status.svg)](https://david-dm.org/iHaiduk/react-typescript)
 
@@ -22,6 +22,7 @@ This system was created for start any project on NodeJs and React.
 - [classnames](https://github.com/JedWatson/classnames) v2.2.5
 - [socket.io](https://socket.io) v2.0.3
 - [React-redux](https://github.com/reactjs/react-redux) v5.0.6
+- [redux-observable v0.16.0](https://redux-observable.js.org)
 - [React-router](https://github.com/ReactTraining/react-router) v4.1.2
 - [React-router-redux](https://github.com/ReactTraining/react-router/tree/master/packages/react-router-redux) v5.0.0-alpha.6
 - [react-helmet](https://github.com/nfl/react-helmet) v5.1.3
@@ -74,6 +75,9 @@ This system was created for start any project on NodeJs and React.
 - [TS-Jest](https://github.com/kulshekhar/ts-jest) v21.0.0
 
 --------------------
+### Other variants of project:
+* [redux-thunk + redux-promise](https://github.com/iHaiduk/react-typescript/tree/master)
+* [redux-saga + immutable](https://github.com/iHaiduk/react-typescript/tree/saga)
 --------------------
 
 # Getting Started
