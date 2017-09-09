@@ -6,18 +6,18 @@ with [redux-thunk v2.2.0](https://github.com/gaearon/redux-thunk) + [redux-promi
 This system was created for start any project on NodeJs and React.
 ### Built using
 #### For styles
-- [Webpack](https://webpack.github.io) v3.5.5
+- [Webpack](https://webpack.github.io) v3.5.6
 - [SCSS](http://sass-lang.com) + [sass-loader](https://github.com/webpack-contrib/sass-loader) v6.0.6
 - [Bemify](https://github.com/franzheidl/bemify) v0.1.2
 - [normalize-scss](https://github.com/JohnAlbin/normalize-scss) v7.0.0
-- [autoprefixer](https://github.com/postcss/autoprefixer) v7.1.3
+- [autoprefixer](https://github.com/postcss/autoprefixer) v7.1.4
 - [cssnano](http://cssnano.co) v3.10.0 (only Environment production)
 ---------------
 #### For frontend side
 - [TypeScript](https://www.typescriptlang.org) v2.5.2 + [awesome-typescript-loader](https://github.com/s-panferov/awesome-typescript-loader) v3.2.3
 - [React](https://facebook.github.io/react/) v15.6.1
 - [redux](http://redux.js.org) v3.7.2
-- [Webpack](https://webpack.github.io) v3.5.5
+- [Webpack](https://webpack.github.io) v3.5.6
 ###### Other
 - [classnames](https://github.com/JedWatson/classnames) v2.2.5
 - [socket.io](https://socket.io) v2.0.3
@@ -39,12 +39,12 @@ This system was created for start any project on NodeJs and React.
 - [koa-router](https://github.com/alexmingoia/koa-router) v7.2.1
 
 ###### DataBase and Memory
-- [mongoose](http://mongoosejs.com) v4.11.9
-- [moize](https://github.com/planttheidea/moize) v3.4.0
+- [mongoose](http://mongoosejs.com) v4.11.10
+- [moize](https://github.com/planttheidea/moize) v3.4.2
 
 ###### For user system
 - [bcryptjs](https://github.com/dcodeIO/bcrypt.js) v2.4.3
-- [jsonwebtoken](https://jwt.io/) v7.4.2
+- [jsonwebtoken](https://jwt.io/) v8.0.0
 
 ###### For SVG
 - [svg-sprite-loader](https://github.com/kisenka/svg-sprite-loader) v3.2.5
@@ -70,8 +70,8 @@ This system was created for start any project on NodeJs and React.
 - [PM2](https://github.com/Unitech/pm2) latest
 
 ## Testing system
-- [Jest](https://facebook.github.io/jest/) v20.0.4
-- [TS-Jest](https://github.com/kulshekhar/ts-jest) v20.0.14
+- [Jest](https://facebook.github.io/jest/) v21.0.2
+- [TS-Jest](https://github.com/kulshekhar/ts-jest) v21.0.0
 
 --------------------
 --------------------
