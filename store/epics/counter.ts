@@ -1,4 +1,5 @@
 
+import {ICountModel} from "_reducer/count";
 import { Epic } from "redux-observable";
 import "rxjs/add/operator/debounceTime";
 import "rxjs/add/operator/distinctUntilChanged";
@@ -10,13 +11,9 @@ interface ICounterAction {
     type: typeof CLICK | typeof INCREMENT;
 }
 
-interface IMyState {
-    a: number;
-}
-
-export const addCount: Epic<ICounterAction, IMyState> = (action$) =>
+export const addCount: Epic<ICounterAction, ICountModel> = (action$) =>
     action$.ofType(CLICK)
-        .debounceTime(500)
+        .debounceTime(200)
         .distinctUntilChanged()
         .take(3)
         .mapTo<ICounterAction, any>({type: INCREMENT});

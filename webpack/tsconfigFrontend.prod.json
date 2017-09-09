@@ -25,6 +25,7 @@
       "_components/*":    ["./view/components/*"],
       "_containers/*":    ["./view/containers/*"],
       "_reducers":        ["./store/reducers/index"],
+      "_reducer/*":       ["./store/reducers/*"],
       "_route":           ["./route/index"],
       "_store":           ["./store/index"],
       "_static/*":        ["./static/*"],
@@ -53,7 +54,7 @@
     "cacheDirectory": ".gulp/ts",
     "babelOptions": {
       "presets": ["react-optimize", "stage-0"]
-    },
+    }
   },
   "compileOnSave": false,
   "buildOnSave": false

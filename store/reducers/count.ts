@@ -1,4 +1,5 @@
 import {IActive} from "_reducers";
+import {Map} from "immutable";
 import {INCREMENT} from "../constants";
 
 interface ICount {
@@ -7,10 +8,15 @@ interface ICount {
 
 type Count = ICount | IActive;
 
-export default (state = 0, {type}: Count) => {
+export interface ICountModel {
+    number: number;
+}
+
+export default (state = Map({number: 0}), {type}: Count) => {
     switch (type) {
         case INCREMENT:
-            return state + 1;
+            const num: number = state.get("number");
+            return state.set("number", num + 1);
         default:
             return state;
     }

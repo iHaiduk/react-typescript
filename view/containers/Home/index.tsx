@@ -16,7 +16,7 @@ class HomeComponent extends React.Component<IHelloProps, undefined> {
 
     public static defaultProps: IHelloProps = {
         compiler: "Test",
-        count: 0,
+        count: null,
         framework: "work",
     };
 
@@ -25,14 +25,15 @@ class HomeComponent extends React.Component<IHelloProps, undefined> {
     }
 
     public render() {
+        const {children, count} = this.props;
         return (
             <PureComponent>
-                {this.props.children}
+                {children}
                 <Header/>
                 <PureComponent tag="main">
                     Main
                     <div>
-                        <button onClick={changeCount}>Count click: {this.props.count}</button>
+                        <button onClick={changeCount}>Count click: {count.get("number")}</button>
                     </div>
                     <IconComponent name="download" />
                     <Link to={"/"}>Home</Link>

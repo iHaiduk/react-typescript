@@ -24,6 +24,7 @@
       "_containers/*":    ["./view/containers/*"],
       "_helpers/*":       ["./helpers/*"],
       "_reducers":        ["./store/reducers/index"],
+      "_reducer/*":       ["./store/reducers/*"],
       "_route":           ["./route/index"],
       "_store":           ["./store/index"],
       "_static/*":        ["./static/*"],
