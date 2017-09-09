@@ -30,8 +30,8 @@ const entry = process.env.TEMP_NAME ? {bundle: process.env.TEMP_NAME} : {
         'react-router-redux',
 
         'redux',
-        "redux-thunk",
-        "redux-promise-middleware",
+        'rxjs',
+        'redux-observable',
 
         "history",
         'immutable',

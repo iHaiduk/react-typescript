@@ -1,4 +1,5 @@
+import store from "_store";
+import {CLICK} from "../constants";
+const {dispatch} = store;
 
-const actions = {};
-
-export default actions;
+export const changeCount = () => dispatch({ type: CLICK });
