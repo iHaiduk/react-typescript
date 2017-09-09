@@ -74,6 +74,9 @@ This system was created for start any project on NodeJs and React.
 - [TS-Jest](https://github.com/kulshekhar/ts-jest) v21.0.0
 
 --------------------
+### Other variants of project:
+* [redux-thunk + redux-promise](https://github.com/iHaiduk/react-typescript/tree/master)
+* [ReactiveX + immutable](https://github.com/iHaiduk/react-typescript/tree/rxjs)
 --------------------
 
 # Getting Started
