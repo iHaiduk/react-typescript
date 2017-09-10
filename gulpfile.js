@@ -101,7 +101,7 @@ gulp.task('tinypng', function () {
 
 gulp.task('prebuild', ['tinypng'], (callback) => {
     try {
-        exec('npm run productionFrontend', (err, stdout, stderr) => {
+        exec('npm run productionFrontend', {maxBuffer: 1024 * 500}, (err, stdout, stderr) => {
             if(err != null) {
                 callback(err);
                 console.error(err);
@@ -109,7 +109,7 @@ gulp.task('prebuild', ['tinypng'], (callback) => {
             }
             console.info(stdout);
             console.error(stderr);
-            exec('npm run productionBackend', (err, stdout, stderr) => {
+            exec('npm run productionBackend', {maxBuffer: 1024 * 500}, (err, stdout, stderr) => {
                 if(err != null) {
                     callback(err);
                     console.error(err);
