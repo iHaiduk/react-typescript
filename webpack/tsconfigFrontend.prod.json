@@ -53,6 +53,7 @@
     "useBabel": true,
     "cacheDirectory": ".gulp/ts",
     "babelOptions": {
+      "plugins": ["transform-react-constant-elements", ["transform-remove-console", { "exclude": [ "error" ] }], "transform-remove-debugger", "transform-undefined-to-void", "transform-property-literals", "minify-type-constructors", "minify-numeric-literals", "minify-guarded-expressions", "minify-constant-folding", "transform-minify-booleans", "transform-merge-sibling-variables"],
       "presets": ["react-optimize", "stage-0"]
     }
   },
