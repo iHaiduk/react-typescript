@@ -1,10 +1,7 @@
+import {IBlock} from "_stylesLoad/interface";
 import {Map} from "immutable";
 import * as React from "react";
 import {Helmet} from "react-helmet";
-
-interface IBlock {
-    readonly header: string;
-}
 
 const ASSETS: any = (process.env.BROWSER ? (window as any).ASSETS : require("_config").ASSETS) || {};
 export const block: Map<any, IBlock> = Map((require as any)("./block.scss"));

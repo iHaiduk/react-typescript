@@ -1,10 +1,7 @@
+import {ISection} from "_stylesLoad/interface";
 import {Map} from "immutable";
 import * as React from "react";
 import {Helmet} from "react-helmet";
-
-declare interface ISection {
-    readonly section: string;
-}
 
 const ASSETS: any = (process.env.BROWSER ? (window as any).ASSETS : require("_config").ASSETS) || {};
 export const section: Map<any, ISection> = Map((require as any)("./section.scss"));
