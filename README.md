@@ -40,8 +40,8 @@ This system was created for start any project on NodeJs and React.
 - [koa-router](https://github.com/alexmingoia/koa-router) v7.2.1
 
 ###### DataBase and Memory
-- [mongoose](http://mongoosejs.com) v4.11.10
-- [moize](https://github.com/planttheidea/moize) v3.4.2
+- [mongoose](http://mongoosejs.com) v4.11.11
+- [moize](https://github.com/planttheidea/moize) v4.0.0
 
 ###### For user system
 - [bcryptjs](https://github.com/dcodeIO/bcrypt.js) v2.4.3
