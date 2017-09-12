@@ -1,7 +1,7 @@
-//@import '~normalize-scss';
+@import '~normalize-scss';
 @import 'variables/colors';
 
-//@include normalize();
+@include normalize();
 
 body {
   background: $background-color;

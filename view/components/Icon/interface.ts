@@ -1,3 +1,4 @@
+import {classNames} from "_style";
 import {ReactNode} from "react";
 
 export interface IIcon {
@@ -5,4 +6,5 @@ export interface IIcon {
     name: string;
     spriteName?: string;
     children?: ReactNode;
+    className?: classNames;
 }

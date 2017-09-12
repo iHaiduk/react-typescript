@@ -1,8 +1,7 @@
-import {Header} from "_blocks/Header";
+import {IconComponent} from "_components/Icon";
 import {PureComponent} from "_components/PureComponent";
-import {sectionStyle} from "_style";
+import {component, sectionStyle} from "_style";
 import * as React from "react";
-import {Link} from "react-router-dom";
 import {IHelloProps} from "./interface";
 
 @sectionStyle
@@ -18,17 +17,21 @@ export class Test extends React.Component<IHelloProps, undefined> {
     }
 
     public render() {
+
+        const styleIcon = {
+            [component.icon]: true,
+            [component["icon--white"]]: true,
+        };
+
         return (
             <PureComponent>
                 {this.props.children}
-                <Header/>
-                <PureComponent tag="main">
-                    Main Test
-                    <Link to={"/"}>Home</Link>
-                    <Link to={"/test"}>test</Link>
+                <PureComponent tag="section">
+                    List of components
                 </PureComponent>
-                <PureComponent tag="footer">
-                    Footer Test`
+                <PureComponent tag="section">
+                    Componetns:
+                    <IconComponent name="download" className={styleIcon} />
                 </PureComponent>
             </PureComponent>
         );

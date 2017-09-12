@@ -1,0 +1,13 @@
+@import '~bemify';
+@import '../variables/colors';
+
+@include block('icon') {
+  display: inline-block;
+  overflow: visible;
+  width: $icon-default-size;
+  height: $icon-default-size;
+
+  @include modifier("white") {
+    fill: $icon-color-white;
+  }
+}
