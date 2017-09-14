@@ -1,5 +1,5 @@
-import request from "_helpers/xhr";
 import {component} from "_style";
+import request from "_utils/xhr";
 import * as cx from "classnames";
 import * as React from "react";
 import {IIcon} from "./interface";

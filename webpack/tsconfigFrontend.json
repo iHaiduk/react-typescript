@@ -22,7 +22,7 @@
       "_blocks/*":        ["./view/block/*"],
       "_components/*":    ["./view/components/*"],
       "_containers/*":    ["./view/containers/*"],
-      "_helpers/*":       ["./helpers/*"],
+      "_utils/*":         ["./utils/*"],
       "_reducers":        ["./store/reducers/index"],
       "_reducer/*":       ["./store/reducers/*"],
       "_route":           ["./route/index"],
@@ -50,7 +50,16 @@
     "useCache": true,
     "cacheDirectory": ".gulp/ts",
     "useTranspileModule": true,
-    "silent": true
+    "silent": true,
+    "babelOptions": {
+      "presets": ["react-optimize", "stage-0", ["env", {
+        "targets": {
+          "browsers": [">1%", "last 3 versions", "safari >= 7"],
+          "modules": false,
+          "useBuiltIns": true
+        }
+      }]]
+    }
   },
   "compileOnSave": false,
   "buildOnSave": false

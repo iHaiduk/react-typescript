@@ -45,7 +45,7 @@ This system was created for start any project on NodeJs and React.
 
 ###### For user system
 - [bcryptjs](https://github.com/dcodeIO/bcrypt.js) v2.4.3
-- [jsonwebtoken](https://jwt.io/) v8.0.0
+- [jsonwebtoken](https://jwt.io/) v8.0.1
 
 ###### For SVG
 - [svg-sprite-loader](https://github.com/kisenka/svg-sprite-loader) v3.2.5
@@ -71,8 +71,8 @@ This system was created for start any project on NodeJs and React.
 - [PM2](https://github.com/Unitech/pm2) latest
 
 ## Testing system
-- [Jest](https://facebook.github.io/jest/) v21.0.2
-- [TS-Jest](https://github.com/kulshekhar/ts-jest) v21.0.0
+- [Jest](https://facebook.github.io/jest/) v21.1.0
+- [TS-Jest](https://github.com/kulshekhar/ts-jest) v21.0.1
 
 --------------------
 ### Other variants of project:

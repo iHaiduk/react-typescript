@@ -5,6 +5,8 @@ const WebpackErrorNotificationPlugin = require('webpack-error-notification');
 const BellOnBundlerErrorPlugin = require('bell-on-bundler-error-plugin');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const SpriteLoaderPlugin = require('svg-sprite-loader/plugin');
+const vendorStyles = require("./vendor.style").default;
+const vendorScripts = require("./vendor.scripts").default;
 
 const entry = process.env.TEMP_NAME ? {bundle: process.env.TEMP_NAME} : {
     bundle: [
@@ -19,30 +21,8 @@ const entry = process.env.TEMP_NAME ? {bundle: process.env.TEMP_NAME} : {
         // Our app main entry
         './client/index.tsx'
     ],
-    vendor: [
-        'react',
-        'react-dom',
-        'react-helmet',
-        "react-redux",
-        'react-hot-loader',
-        'react-router',
-        'react-router-dom',
-        'react-router-redux',
-
-        'redux',
-        'rxjs',
-        'redux-observable',
-
-        "history",
-        'immutable',
-        'classnames',
-        "socket.io-client"
-    ],
-    style: [
-        './styles/index.ts',
-        './styles/block.tsx',
-        './styles/section.tsx',
-    ],
+    vendor: vendorScripts,
+    style: './styles/index.ts',
 };
 
 const plugins = [
@@ -86,6 +66,8 @@ fs.readdirSync(resolve(__dirname, "..", "styles")).forEach(file => {
         entry[name] = resolve(__dirname, '../styles', name + '.scss');
     }
 });
+
+entry['base'] = [entry['base'], ...vendorStyles];
 
 module.exports = {
     devtool: 'sourcemap',
@@ -141,15 +123,30 @@ module.exports = {
             "_images": resolve(__dirname, '..', 'static/images'),
             "_stylesLoad": resolve(__dirname, '..', 'styles'),
             "_style": resolve(__dirname, '..', 'styles/index.ts'),
-            "_helpers": resolve(__dirname, '..', 'helpers')
+            "_utils": resolve(__dirname, '..', 'utils')
         }
     },
     plugins: plugins,
     module: {
-        // loaders -> rules in webpack 2
         rules: [
             {
+                test: /\.css$/,
+                use: ExtractTextPlugin.extract({
+                    fallback: "style-loader",
+                    use: [
+                        {
+                            loader: "css-loader", options: {
+                            sourceMap: true,
+                            modules: true,
+                            localIdentName: '[local]'
+                        }
+                        }
+                    ]
+                })
+            },
+            {
                 test: /\.scss$/,
+                exclude: /node_modules/,
                 use:
                     ExtractTextPlugin.extract({
                         fallback: "style-loader",
@@ -158,7 +155,7 @@ module.exports = {
                                 loader: "css-loader", options: {
                                 sourceMap: true,
                                 modules: true,
-                                importLoaders: 1,
+                                importLoaders: 3,
                                 localIdentName: '[local]---[hash:base64]'
                             }
                             },
@@ -241,7 +238,7 @@ module.exports = {
                 exclude: /node_modules/,
                 include: [
                     resolve(__dirname, '..', 'client'),
-                    resolve(__dirname, '..', 'helpers'),
+                    resolve(__dirname, '..', 'utils'),
                     resolve(__dirname, '..', 'route'),
                     resolve(__dirname, '..', 'store'),
                     resolve(__dirname, '..', 'styles'),

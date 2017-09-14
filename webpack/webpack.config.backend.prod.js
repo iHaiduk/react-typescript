@@ -4,7 +4,7 @@ const webpack = require('webpack');
 const nodeExternals = require('webpack-node-externals');
 const BabiliPlugin = require("babel-minify-webpack-plugin");
 const CleanWebpackPlugin = require('clean-webpack-plugin');
-
+const vendorStyles = require("./vendor.style").default;
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const SpriteLoaderPlugin = require('svg-sprite-loader/plugin');
 
@@ -18,7 +18,7 @@ fs.readdirSync(resolve(__dirname, "..", "styles")).forEach(file => {
         entry[name] = resolve(__dirname, '../styles', name + '.scss');
     }
 });
-
+entry['base'] = [entry['base'], ...vendorStyles];
 const assets = fs.readFileSync(resolve(__dirname, "..", "dist", "server", "manifest.json"), "utf-8");
 
 module.exports = {
@@ -54,7 +54,7 @@ module.exports = {
             "_stylesLoad": resolve(__dirname, '..', 'styles'),
             "_style": resolve(__dirname, '..', 'styles/index.ts'),
             "_server": resolve(__dirname, '..', 'server'),
-            "_helpers": resolve(__dirname, '..', 'helpers')
+            "_utils": resolve(__dirname, '..', 'utils')
         }
     },
     node: {
@@ -91,6 +91,43 @@ module.exports = {
     module: {
         rules: [
             {
+                test: /\.css$/,
+                use: ExtractTextPlugin.extract({
+                    fallback: "style-loader",
+                    use: [
+                        {
+                            loader: "css-loader", options: {
+                            sourceMap: false,
+                            modules: true,
+                            minimize: true,
+                            localIdentName: '[local]',
+                            importLoaders: 1,
+                        }
+                        },
+                        {
+                            loader: 'postcss-loader',
+                            options: {
+                                sourceMap: false,
+                                plugins: (loader) => [
+                                    require('autoprefixer')({
+                                        browsers: [
+                                            'last 2 versions',
+                                            '> 1%',
+                                            'android 4',
+                                            'iOS 9',
+                                        ],
+                                        cascade: false
+                                    }),
+                                    require('cssnano')({
+                                        preset: 'advanced',
+                                    })
+                                ]
+                            }
+                        },
+                    ]
+                })
+            },
+            {
                 test: /\.scss$/,
                 use:
                     ExtractTextPlugin.extract({
@@ -100,7 +137,7 @@ module.exports = {
                                 loader: "css-loader", options: {
                                 sourceMap: false,
                                 modules: true,
-                                importLoaders: 1,
+                                importLoaders: 3,
                                 minimize: true,
                                 localIdentName: '[hash:base64:6]'
                             }
@@ -186,7 +223,7 @@ module.exports = {
                 exclude: /node_modules/,
                 include: [
                     resolve(__dirname, '..', 'server'),
-                    resolve(__dirname, '..', 'helpers'),
+                    resolve(__dirname, '..', 'utils'),
                     resolve(__dirname, '..', 'route'),
                     resolve(__dirname, '..', 'store'),
                     resolve(__dirname, '..', 'styles'),

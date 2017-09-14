@@ -4,6 +4,7 @@
     "max-line-length": [true, 150],
     "no-console": [true, "debug", "info", "log", "time", "timeEnd", "trace"],
     "no-var-requires": false,
-    "no-submodule-imports": false
+    "no-submodule-imports": false,
+    "object-literal-sort-keys": false
   }
 }

@@ -6,6 +6,7 @@ const WebpackErrorNotificationPlugin = require('webpack-error-notification');
 const BellOnBundlerErrorPlugin = require('bell-on-bundler-error-plugin');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const SpriteLoaderPlugin = require('svg-sprite-loader/plugin');
+const vendorStyles = require("./vendor.style").default;
 
 const entry = {
     index: [
@@ -20,6 +21,8 @@ fs.readdirSync(resolve(__dirname, "..", "styles")).forEach(file => {
         entry[name] = resolve(__dirname, '../styles', name + '.scss');
     }
 });
+
+entry['base'] = [entry['base'], ...vendorStyles];
 
 module.exports = {
     devtool: 'sourcemap',
@@ -59,7 +62,7 @@ module.exports = {
             "_stylesLoad": resolve(__dirname, '..', 'styles'),
             "_style": resolve(__dirname, '..', 'styles/index.ts'),
             "_server": resolve(__dirname, '..', 'server'),
-            "_helpers": resolve(__dirname, '..', 'helpers')
+            "_utils": resolve(__dirname, '..', 'utils')
         }
     },
     node: {
@@ -96,17 +99,36 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.scss$/,
-                use:
-                    ExtractTextPlugin.extract({
+                test: /\.css$/,
+                use: ExtractTextPlugin.extract({
                         fallback: "style-loader",
                         use: [
                             {
                                 loader: "css-loader", options: {
                                 sourceMap: true,
                                 modules: true,
-                                importLoaders: 1,
-                                localIdentName: '[local]---[hash:base64]'
+                                localIdentName: '[local]'
+                            }
+                            }
+                        ]
+                    })
+            },
+            {
+                test: /\.scss$/,
+                exclude: /node_modules/,
+                include: resolve('./styles'),
+                use: ExtractTextPlugin.extract({
+                        fallback: "style-loader",
+                        use: [
+                            {
+                                loader: "css-loader", options: {
+                                sourceMap: true,
+                                modules: true,
+                                importLoaders: 3,
+                                localIdentName: '[local]---[hash:base64]',
+                                discardComments: {
+                                    removeAll: true
+                                }
                             }
                             },
                             'group-css-media-queries-loader',
@@ -129,10 +151,11 @@ module.exports = {
                             },
                             {
                                 loader: "sass-loader", options: {
-                                    sourceMap: true,
-                                    // indentedSyntax: true,
-                                    modules: true,
-                                }
+                                sourceMap: true,
+                                // indentedSyntax: true,
+                                modules: true,
+                                outputStyle: 'expanded',
+                            }
                             }
                         ]
                     })
@@ -158,7 +181,7 @@ module.exports = {
                         loader: 'file-loader',
                         options: {
                             name: '[sha512:hash:base64:7].[ext]',
-                            publicPath: function(url) {
+                            publicPath: function (url) {
                                 return url.replace('../public/images/', '/images/')
                             },
                             outputPath: '../public/images/'
@@ -187,7 +210,7 @@ module.exports = {
                 exclude: /node_modules/,
                 include: [
                     resolve(__dirname, '..', 'server'),
-                    resolve(__dirname, '..', 'helpers'),
+                    resolve(__dirname, '..', 'utils'),
                     resolve(__dirname, '..', 'route'),
                     resolve(__dirname, '..', 'store'),
                     resolve(__dirname, '..', 'styles'),

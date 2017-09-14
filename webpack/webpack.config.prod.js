@@ -8,31 +8,13 @@ const BellOnBundlerErrorPlugin = require('bell-on-bundler-error-plugin');
 const OfflinePlugin = require('offline-plugin');
 const ManifestPlugin = require('webpack-manifest-plugin');
 const SpriteLoaderPlugin = require('svg-sprite-loader/plugin');
+const vendorStyles = require("./vendor.style").default;
+const vendorScripts = require("./vendor.scripts").default;
 
 const entry = process.env.TEMP_NAME ? {bundle: process.env.TEMP_NAME} : {
     bundle: './client/index.tsx',
-    vendor: [
-        'react',
-        'react-dom',
-        'react-helmet',
-        "react-redux",
-        'react-hot-loader',
-        'react-router',
-        'react-router-dom',
-        'react-router-redux',
-
-        'redux',
-        'rxjs',
-        'redux-observable',
-
-        "history",
-        'immutable',
-        'classnames',
-        "socket.io-client"
-    ],
-    style: [
-        './styles/index.ts',
-    ],
+    vendor: vendorScripts,
+    style: './styles/index.ts',
 };
 
 const excludes_offline = ['style/style.css*', 'style.css*'];
@@ -45,6 +27,7 @@ fs.readdirSync(resolve(__dirname, "..", "styles")).forEach(file => {
         excludes_offline.push(name + ".js*")
     }
 });
+entry['base'] = [entry['base'], ...vendorStyles];
 
 const plugins = [
     new webpack.LoaderOptionsPlugin({
@@ -155,12 +138,49 @@ module.exports = {
             "_images": resolve(__dirname, '..', 'static/images'),
             "_stylesLoad": resolve(__dirname, '..', 'styles'),
             "_style": resolve(__dirname, '..', 'styles/index.ts'),
-            "_helpers": resolve(__dirname, '..', 'helpers')
+            "_utils": resolve(__dirname, '..', 'utils')
         }
     },
     plugins: plugins,
     module: {
         rules: [
+            {
+                test: /\.css$/,
+                use: ExtractTextPlugin.extract({
+                    fallback: "style-loader",
+                    use: [
+                        {
+                            loader: "css-loader", options: {
+                            sourceMap: false,
+                            modules: true,
+                            minimize: true,
+                            localIdentName: '[local]',
+                            importLoaders: 1,
+                        }
+                        },
+                        {
+                            loader: 'postcss-loader',
+                            options: {
+                                sourceMap: false,
+                                plugins: (loader) => [
+                                    require('autoprefixer')({
+                                        browsers: [
+                                            'last 2 versions',
+                                            '> 1%',
+                                            'android 4',
+                                            'iOS 9',
+                                        ],
+                                        cascade: false
+                                    }),
+                                    require('cssnano')({
+                                        preset: 'advanced',
+                                    })
+                                ]
+                            }
+                        },
+                    ]
+                })
+            },
             {
                 test: /\.scss$/,
                 use:
@@ -244,7 +264,7 @@ module.exports = {
                 exclude: /node_modules/,
                 include: [
                     resolve(__dirname, '..', 'client'),
-                    resolve(__dirname, '..', 'helpers'),
+                    resolve(__dirname, '..', 'utils'),
                     resolve(__dirname, '..', 'route'),
                     resolve(__dirname, '..', 'store'),
                     resolve(__dirname, '..', 'styles'),
