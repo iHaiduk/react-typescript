@@ -1,13 +1,22 @@
 @import '~bemify';
-@import '../variables/colors';
+@import '../variables/index';
 
 @include block('icon') {
   display: inline-block;
+  height: $icon-default-size;
   overflow: visible;
   width: $icon-default-size;
-  height: $icon-default-size;
 
-  @include modifier("white") {
+  & svg {
+    display: block;
+    overflow: visible;
+  }
+
+  @include modifier('white') {
     fill: $icon-color-white;
+  }
+
+  @include modifier('red') {
+    fill: $icon-color-red;
   }
 }

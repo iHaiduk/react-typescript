@@ -1,14 +1,12 @@
-import {block} from "./block";
-import {component} from "./components";
-import {section, sectionStyle} from "./section";
+import {IBlock, IComponents, ISection} from "_stylesLoad/interface";
 
-export {
-    block,
-    component,
-    section,
-    sectionStyle,
-};
+const block: IBlock = (require as any)("./block.scss");
+const component: IComponents = (require as any)("./components.scss");
+const section: ISection = (require as any)("./section.scss");
 
+export { block, component, section };
+
+// Interfaces
 interface IClassDictionary {
     [id: string]: boolean | undefined | null;
 }

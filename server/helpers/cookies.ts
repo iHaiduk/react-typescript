@@ -9,7 +9,8 @@ const cookie = (options?: ISetOption): (ctx: Context, next: () => null) => void 
             private options: any;
             private cookies: any;
 
-            constructor(ctx: Context, options?: ISetOption) {
+            constructor(parameters: { ctx: Context, options: ISetOption }) {
+                const {ctx: {}, options: {}} = parameters;
                 this.ctx = ctx;
                 this.options = options || {};
                 this.cookies = {...this.ctx.cookies};
@@ -38,7 +39,7 @@ const cookie = (options?: ISetOption): (ctx: Context, next: () => null) => void 
             }
         }
 
-        ctx.cookies = {...ctx.cookies, ...(new Cookie(ctx, options))};
+        ctx.cookies = {...ctx.cookies, ...(new Cookie({ctx, options}))};
         await next();
     };
 

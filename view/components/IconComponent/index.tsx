@@ -2,11 +2,11 @@ import {component} from "_style";
 import request from "_utils/xhr";
 import * as cx from "classnames";
 import * as React from "react";
-import {IIcon} from "./interface";
+import {IIconComponent} from "./interface";
 
-export class IconComponent extends React.PureComponent<IIcon, undefined> {
+export class IconComponent extends React.PureComponent<IIconComponent, undefined> {
 
-    public static defaultProps: IIcon = {
+    public static defaultProps: IIconComponent = {
         className: component.icon,
         name: null,
         spriteName: "sprite",
@@ -30,13 +30,15 @@ export class IconComponent extends React.PureComponent<IIcon, undefined> {
 
     public render() {
 
-        const {name, viewBox, className} = this.props;
-        const classes = cx(className);
+        const {name, viewBox, className, spriteName, ...otherProps} = this.props;
+        const classes = cx(component.icon, className);
 
-        return name && (
-            <svg viewBox={viewBox} className={classes}>
-                <use xlinkHref={`#${name}`}/>
-            </svg>
+        return !!name && (
+            <span  className={classes} {...otherProps}>
+                <svg viewBox={viewBox}>
+                    <use xlinkHref={`#${name}`}/>
+                </svg>
+            </span>
         );
     }
 }

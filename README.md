@@ -40,12 +40,12 @@ This system was created for start any project on NodeJs and React.
 - [koa-router](https://github.com/alexmingoia/koa-router) v7.2.1
 
 ###### DataBase and Memory
-- [mongoose](http://mongoosejs.com) v4.11.11
-- [moize](https://github.com/planttheidea/moize) v4.0.0
+- [mongoose](http://mongoosejs.com) v4.11.10
+- [moize](https://github.com/planttheidea/moize) v3.4.2
 
 ###### For user system
 - [bcryptjs](https://github.com/dcodeIO/bcrypt.js) v2.4.3
-- [jsonwebtoken](https://jwt.io/) v8.0.1
+- [jsonwebtoken](https://jwt.io/) v8.0.0
 
 ###### For SVG
 - [svg-sprite-loader](https://github.com/kisenka/svg-sprite-loader) v3.2.5
@@ -71,8 +71,8 @@ This system was created for start any project on NodeJs and React.
 - [PM2](https://github.com/Unitech/pm2) latest
 
 ## Testing system
-- [Jest](https://facebook.github.io/jest/) v21.1.0
-- [TS-Jest](https://github.com/kulshekhar/ts-jest) v21.0.1
+- [Jest](https://facebook.github.io/jest/) v21.0.2
+- [TS-Jest](https://github.com/kulshekhar/ts-jest) v21.0.0
 
 --------------------
 ### Other variants of project:

@@ -18,5 +18,7 @@ const vendor = [
     'immutable',
     'classnames',
     "socket.io-client",
+
+    "react-select",
 ];
 exports.default = vendor;

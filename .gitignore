@@ -13,3 +13,11 @@ yarn-error.log
 dist
 tsconfig.json
 __snapshots__
+/package-lock.json
+/static/images/2k/
+/static/images/full/
+/static/images/half/
+/static/images/hd/
+/static/images/plus/
+/static/images/wide/
+/static/images/xga/

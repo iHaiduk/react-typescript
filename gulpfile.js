@@ -6,7 +6,7 @@ const nodemon = require('gulp-nodemon');
 const deletefile = require('gulp-delete-file');
 const svgo = require('gulp-svgo');
 const watch = require('gulp-watch');
-const tinypng = require('gulp-tinypng');
+const tinypng = require('gulp-tiny').default;
 const webpack = require("webpack");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
@@ -21,6 +21,9 @@ fs.readdirSync(resolve(__dirname, "styles")).forEach(file => {
     }
 });
 
+const onlyUnique = (value, index, self) => {
+    return self.indexOf(value) === index;
+}
 
 gulp.task('------Development------');
 
@@ -135,14 +138,14 @@ gulp.task('autoTypedStyle', (callback) => {
         plugins: [
             new ExtractTextPlugin("[name].css")
         ]
-    }, function(err, stats) {
+    }, function (err, stats) {
         let template = "";
         style_js_remove.forEach((name) => {
-            if(name === "base") return;
+            if (name === "base") return;
             const str = fs.readFileSync(resolve(__dirname, '.gulp/style', name + '.css'), 'utf8');
             const regex = /(\.([\w-_]+))/gi;
             let m;
-            let clases = []
+            let clases = [];
 
             let _template = `export interface I${name[0].toUpperCase() + name.slice(1)} {\n`;
             while ((m = regex.exec(str)) !== null) {
@@ -152,7 +155,8 @@ gulp.task('autoTypedStyle', (callback) => {
                 }
                 clases.push(m[2])
             }
-            if(clases.length) {
+            clases = (clases.filter(onlyUnique));
+            if (clases.length) {
                 clases.forEach((name) => {
                     _template += `  readonly "${name}": string;\n`
                 });
@@ -172,13 +176,24 @@ gulp.task('autoTypedStyle', (callback) => {
 gulp.task('------Production------');
 
 
-gulp.task('tinypng', function () {
+gulp.task('tinypng', ['autoTypedStyle'], function () {
+    const exit_path = resolve('./static/images');
     gulp.src('./static/original_images/**/*.{png,jpg,jpeg}')
         .pipe(tinypng({
-            apiKey: ['RsN84oBjmXxPkCB5s_ZlfA1fRS1U32LY', 'bN4uZbaI06-ESRiKhD6yS3P4NF9zle7W', 'durCxw2lwQgJmxvwOnpyLrMdEsNEImOY'],
-            cached: true
+            apiKeys: ['RsN84oBjmXxPkCB5s_ZlfA1fRS1U32LY', 'bN4uZbaI06-ESRiKhD6yS3P4NF9zle7W', 'durCxw2lwQgJmxvwOnpyLrMdEsNEImOY'],
+            cached: true,
+            size: [
+                {name: "2k", method: "fit", width: 2560, height: 1440},
+                {name: "full", method: "fit", width: 1920, height: 1080},
+                {name: "plus", method: "fit", width: 1600, height: 900},
+                {name: "hd", method: "fit", width: 1366, height: 768},
+                {name: "xga", method: "fit", width: 1024, height: 768},
+                {name: "wide", method: "fit", width: 768, height: 480},
+                {name: "half", method: "fit", width: 480, height: 320}
+            ],
+            exit_path
         }))
-        .pipe(gulp.dest('./static/images'));
+        .pipe(gulp.dest(exit_path));
 });
 
 gulp.task('prebuild', ['tinypng'], (callback) => {
@@ -207,7 +222,14 @@ gulp.task('prebuild', ['tinypng'], (callback) => {
     }
 });
 
-gulp.task('cleanServer', ['prebuild'], () => {
+gulp.task('fixManifest', ['prebuild'], (cb) => {
+    const path = resolve("dist", "public", "appcache", "manifest.appcache");
+    const content = fs.readFileSync(path).toString().replace(/\/\.\.\/public/gmi, '');
+    fs.writeFileSync(path, content);
+    cb()
+});
+
+gulp.task('cleanServer', ['fixManifest'], () => {
     gulp.src(['./dist/server/**/*.js',
         './dist/server/**/*.map',
         './dist/server/**/*.css'
@@ -231,30 +253,9 @@ gulp.task('cleanStyle', ['cleanPublic'], () => {
     }))
 });
 
-
 gulp.task('svgo', ['cleanStyle'], () => {
 
-    return gulp.src(['./dist/public/*.svg'])
-        .pipe(svgo({
-            plugins: [
-                {removeAttrs: {attrs: ['class', 'fill', 'viewBox']}},
-                {removeUselessDefs: true},
-                {removeDoctype: true},
-                {removeStyleElement: true},
-                {removeComments: true},
-                {cleanupIDs: false},
-                {removeViewBox: true},
-                {removeRasterImages: true},
-                {sortAttrs: true},
-                {mergePaths: true},
-                {removeTitle: true},
-                {removeDesc: true},
-                {removeScriptElement: true},
-                {cleanupNumericValues: {floatPrecision: 3}},
-                {addAttributesToSVGElement: {attribute: ['viewBox="0 0 24 24"']}}
-            ]
-        }))
-        .pipe(gulp.dest('./dist/public'));
+    return gulp.run("svgoDev");
 });
 
 gulp.task('build', ['svgo']);

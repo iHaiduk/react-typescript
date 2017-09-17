@@ -25,6 +25,10 @@ export const HTML = ({html = "", context = {}}: IHTMLRender): React.ReactElement
         <head>
             {helmet.title.toComponent()}
             {helmet.meta.toComponent()}
+            <link href={`/${ASSETS["base.css"] || "style/base.css"}`} media="all" rel="stylesheet" />
+            <link href={`/${ASSETS["section.css"] || "style/section.css"}`} media="all" rel="stylesheet" />
+            <link href={`/${ASSETS["block.css"] || "style/block.css"}`} media="all" rel="stylesheet" />
+            <link href={`/${ASSETS["components.css"] || "style/components.css"}`} media="all" rel="stylesheet" />
             {helmet.link.toComponent()}
         </head>
         <body>

@@ -1,8 +1,7 @@
 import {changeCount} from "_actions";
 import {Header} from "_blocks/Header";
-import {IconComponent} from "_components/Icon";
+import {IconComponent} from "_components/IconComponent";
 import {PureComponent} from "_components/PureComponent";
-import {sectionStyle} from "_style";
 import * as React from "react";
 import {connect} from "react-redux";
 import {Link} from "react-router-dom";
@@ -11,7 +10,6 @@ import {IHelloProps} from "./interface";
 // Example image load
 // const img = require('_images/log.png');
 
-@sectionStyle
 class HomeComponent extends React.Component<IHelloProps, undefined> {
 
     public static defaultProps: IHelloProps = {
