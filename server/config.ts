@@ -79,6 +79,7 @@ const config: IConfig = {
 };
 
 export const ASSETS: any = process.env.ASSETS;
+export const NODE_ENV: string = process.env.NODE_ENV;
 
 export const logConfig = {level: config.logLevel, safe: true};
 

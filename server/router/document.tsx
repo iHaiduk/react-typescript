@@ -1,3 +1,4 @@
+import {NODE_ENV} from "_config";
 import Store from "_store";
 import * as React from "react";
 import {Helmet} from "react-helmet";
@@ -44,7 +45,7 @@ const ChildrenRender = (props?: IpropertyRender): any => {
 export const render: (ctx: any, location: string, context: any) => string = (ctx: any, location: string, context: any = {}) => {
     let stream: any = "";
 
-    if (process.env.NODE_ENV === "production") {
+    if (NODE_ENV === "production") {
         ctx.status = 200;
         ctx.type = "text/html; charset=utf-8";
         ctx.set("Cache-Control", "no-cache");

@@ -2,15 +2,17 @@ import * as Koa from "koa";
 import * as Router from "koa-router";
 import {resolve} from "path";
 import * as pino from "pino";
-import config, {logConfig} from "./config";
+import config, {logConfig, NODE_ENV} from "./config";
 import cookies from "./helpers/cookies";
 import routing from "./router";
 
+import logger from "_server/logger";
 import "./db/dBase";
 
 const log = pino({...logConfig, name: "Server"}, config.pretty);
 const app = new Koa();
 
+app.use(logger({logPino: log, enable: NODE_ENV === "production"}));
 app.use(cookies({
     httpOnly: true,
     maxAge: 60 * 60, // 1 hour

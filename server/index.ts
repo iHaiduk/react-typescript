@@ -1,6 +1,6 @@
+import config, {logConfig, NODE_ENV} from "_config";
 import * as http from "http";
 import * as pino from "pino";
-import config, {logConfig} from "./config";
 import "./redis";
 import application from "./server";
 import socket from "./socket";
@@ -18,13 +18,13 @@ function clearDump() {
     try {
         global.gc();
     } catch (e) {
-        if (process.env.NODE_ENV === "production") {
+        if (NODE_ENV === "production") {
             log.warn("You must run program with 'node --expose-gc' or 'npm start'");
             process.exit();
         }
     }
 }
 
-if (process.env.NODE_ENV === "production") {
+if (NODE_ENV === "production") {
     setInterval(clearDump, 15000);
 }

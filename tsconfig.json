@@ -2,7 +2,7 @@
   "compilerOptions": {
     "alwaysStrict": true,
     "outDir": "./dist/",
-    "sourceMap": false,
+    "sourceMap": true,
     "noImplicitAny": true,
     "module": "commonjs",
     "moduleResolution": "node",
@@ -10,7 +10,7 @@
     "importHelpers": true,
     "jsx": "react",
     "baseUrl": "./",
-    "removeComments": true,
+    "removeComments": false,
     "allowUnusedLabels": false,
     "noImplicitThis": true,
     "noUnusedLocals": true,
@@ -39,6 +39,8 @@
   "include": [
     "./server/**/*",
     "./route/**/*",
+    "./helpers/**/*",
+    "./static/**/*",
     "./store/**/*",
     "./styles/**/*",
     "./view/**/*"
