@@ -19,17 +19,19 @@
     "noUnusedParameters": false,
     "paths": {
       "_actions":         ["./store/actions/index"],
-      "_blocks/*":        ["./view/block/*"],
+      "_blocks":          [ "./view/block/index" ],
       "_components/*":    ["./view/components/*"],
       "_containers/*":    ["./view/containers/*"],
-      "_helpers/*":       ["./helpers/*"],
+      "_utils/*":         ["./utils/*"],
       "_reducers":        ["./store/reducers/index"],
+      "_reducer/*":       ["./store/reducers/*"],
       "_route":           ["./route/index"],
       "_store":           ["./store/index"],
       "_static/*":        ["./static/*"],
       "_images/*":        ["./static/images/*"],
       "_stylesLoad/*":    ["./styles/*"],
-      "_style":           ["./styles/index"]
+      "_style":           ["./styles/index"],
+      "_socket":          ["./client/socket"]
     },
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true
@@ -49,7 +51,16 @@
     "useCache": true,
     "cacheDirectory": ".gulp/ts",
     "useTranspileModule": true,
-    "silent": true
+    "silent": true,
+    "babelOptions": {
+      "presets": ["es6-promise", "react-optimize", "stage-0", ["env", {
+        "targets": {
+          "browsers": [">1%", "last 3 versions", "safari >= 7"],
+          "modules": false,
+          "useBuiltIns": true
+        }
+      }]]
+    }
   },
   "compileOnSave": false,
   "buildOnSave": false

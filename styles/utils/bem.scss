@@ -1,0 +1,99 @@
+$element-separator: '__';
+$modifier-separator: '--';
+
+@function selectortostring($selector) {
+  $selector: inspect($selector); //cast to string
+  $selector: str-slice($selector, 2, -2); //remove brackets
+  @return $selector;
+}
+
+@function containsmodifier($selector) {
+  $selector: selectortostring($selector);
+  @if str-index($selector, $modifier-separator) {
+    @return true;
+  } @else {
+    @if str-index($selector, $element-separator) {
+      @return true;
+    } @else {
+      @return false;
+    }
+  }
+}
+
+@function getblock($selector) {
+  $selector: selectortostring($selector);
+  @if str-index($selector, $modifier-separator) {
+    $modifierstart: str-index($selector, $modifier-separator) - 1;
+    @return str-slice($selector, 0, $modifierstart);
+  }
+  @if str-index($selector, $element-separator) {
+    $modifierstart: str-index($selector, $element-separator) - 1;
+    @return str-slice($selector, 0, $modifierstart);
+  }
+}
+
+@mixin block($block) {
+  .#{$block} {
+    @content;
+  }
+}
+
+@mixin element($element, $not_root: false) {
+  $selector: &;
+  @if containsmodifier($selector) {
+    $block: getblock($selector);
+    @at-root {
+      #{&} #{$block + $element-separator + $element} {
+        @content;
+      }
+    }
+  } @else {
+    @if ($not_root) {
+      #{$selector + $element-separator + $element} {
+        @content;
+      }
+    } @else {
+      @at-root {
+        #{$selector + $element-separator + $element} {
+          @content;
+        }
+      }
+    }
+  }
+}
+
+@mixin modifier($modifier) {
+  @at-root {
+    #{&}#{$modifier-separator + $modifier} {
+      @content;
+    }
+  }
+}
+
+@mixin bem($block, $element: null, $modifier: null) {
+  @if $element != null and $modifier != null {
+    @at-root {
+      #{&} .#{$block}#{$element-separator + $element}#{$modifier-separator + $modifier} {
+        @content;
+      }
+    }
+  } @else if ($element != null and $modifier == null) {
+    @at-root {
+      #{&} .#{$block}#{$element-separator + $element} {
+        @content;
+      }
+    }
+  } @else if ($element == null and $modifier != null) {
+    @at-root {
+      #{&} .#{$block}#{$modifier-separator + $modifier} {
+        @content;
+      }
+    }
+  } @else {
+    @at-root {
+      #{&} .#{$block} {
+        @content;
+      }
+    }
+  }
+}

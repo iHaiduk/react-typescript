@@ -1,0 +1,6 @@
+@import '../utils/bem';
+@import '../variables/index';
+
+@include block('link') {
+  text-decoration: none;
+}

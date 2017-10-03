@@ -1,12 +1,14 @@
 import { combineReducers } from "redux";
+import count from "./count";
 import routing from "./routing";
-import test from "./test";
 
-const reducers = () => {
-    return  combineReducers({
-        routing: process.env.BROWSER ? routing : null,
-        test,
-    });
-};
+export default combineReducers({
+    count,
+    routing: process.env.BROWSER ? routing : null,
+});
 
-export default reducers;
+export interface IActive {
+    type: string;
+    data: any;
+    payload: any;
+}

@@ -1,19 +1,15 @@
-// import DynamicLoader from "_components/DynamicLoader";
+import {ErrorComponent} from "_components/ErrorComponent";
+import LazyLoadComponent from "_components/LazyLoadComponent";
+import {LoadingComponent} from "_components/LoadingComponent";
 import * as React from "react";
-// export declare function _import<T extends { [K: string]: any; }>(path: string): Promise<T>;
-import createLazyContainer from "react-lazy-import";
 import {Route, Switch} from "react-router";
-
-const Loading: React.SFC<{}> = () => <div>Loading...</div>;
-const Error: React.SFC<{}> = () => <div>Error!</div>;
-const Home = createLazyContainer(() => import("_containers/Home"), Loading, Error);
-const Test = createLazyContainer(() => import("_containers/Test"), Loading, Error);
-
+declare const System: { import: (path: string) => Promise<any>; };
+const Home = LazyLoadComponent(() => System.import("_containers/Home"), LoadingComponent, ErrorComponent);
+const Test = LazyLoadComponent(() => System.import("_containers/Test"), LoadingComponent, ErrorComponent);
 export const Routes = () => (
-    <Switch>
-            <Route exact={true} path="/" component={Home} />
-            <Route path="/test" component={Test} />
-    </Switch>
-);
+   <Switch>
+       <Route exact={true} path="/" component={Home}/>
+       <Route path="/test" component={Test}/>
+   </Switch>);
 
 export default Routes;

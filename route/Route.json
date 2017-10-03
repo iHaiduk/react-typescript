@@ -1,0 +1,13 @@
+{
+  "routes": [
+    {
+      "path": "/",
+      "container": "Home",
+      "exact": true
+    },
+    {
+      "path": "/test",
+      "container": "Test"
+    }
+  ]
+}

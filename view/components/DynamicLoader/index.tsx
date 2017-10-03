@@ -12,11 +12,10 @@ interface IBundleState {
 
 class Bundle extends React.Component<IBundleProps, IBundleState> {
 
+    public state = {mod: false};
+
     constructor(props: IBundleProps) {
         super(props);
-        this.state = {
-            mod: false,
-        };
     }
 
     public componentWillMount() {

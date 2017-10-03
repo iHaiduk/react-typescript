@@ -1,6 +1,7 @@
+import * as elastic from "elasticsearch";
 import * as Mongoose from "mongoose";
 import * as pino from "pino";
-import config, {database, logConfig} from "./../config";
+import config, {database, elasticConfig, logConfig} from "./../config";
 
 const log = pino({...logConfig, name: "DataBase"}, config.pretty);
 
@@ -8,6 +9,7 @@ export const Schema = Mongoose.Schema;
 export const ObjectId = Mongoose.Schema.Types.ObjectId;
 export const Mixed = Mongoose.Schema.Types.Mixed;
 export const ObjectValid = Mongoose.Types.ObjectId.isValid;
+export const esClient = new elastic.Client(elasticConfig);
 
 export let isConnected: boolean = false;
 export let connection: Mongoose.Connection;

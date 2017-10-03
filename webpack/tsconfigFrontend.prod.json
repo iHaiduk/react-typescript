@@ -19,27 +19,29 @@
     "noUnusedParameters": false,
     "paths": {
       "_actions":         ["./store/actions/index"],
-      "_blocks/*":        ["./view/block/*"],
-      "_config":          ["./server/config"],
-      "_helpers/*":       ["./helpers/*"],
+      "_blocks":          [ "./view/block/index" ],
       "_components/*":    ["./view/components/*"],
       "_containers/*":    ["./view/containers/*"],
+      "_utils/*":         ["./utils/*"],
       "_reducers":        ["./store/reducers/index"],
+      "_reducer/*":       ["./store/reducers/*"],
       "_route":           ["./route/index"],
       "_store":           ["./store/index"],
       "_static/*":        ["./static/*"],
       "_images/*":        ["./static/images/*"],
       "_stylesLoad/*":    ["./styles/*"],
-      "_style":           ["./styles/index"]
+      "_style":           ["./styles/index"],
+      "_socket":          ["./client/socket"]
     },
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true
   },
   "include": [
     "./client/**/*",
-    "./helpers/**/*",
     "./route/**/*",
+    "./helpers/**/*",
     "./store/**/*",
+    "./static/**/*",
     "./styles/**/*",
     "./view/**/*"
   ],
@@ -47,13 +49,20 @@
     "forkChecker": true,
     "useWebpackText": false,
     "useCache": true,
+    "cacheDirectory": ".gulp/ts",
     "useTranspileModule": true,
     "silent": true,
     "useBabel": true,
-    "cacheDirectory": ".gulp/ts",
     "babelOptions": {
-      "presets": ["react-optimize", "stage-0"]
-    },
+      "plugins": ["es6-promise", "dynamic-import-webpack", "transform-react-constant-elements", "transform-remove-debugger", "transform-undefined-to-void", "transform-property-literals", "minify-type-constructors", "minify-numeric-literals", "minify-guarded-expressions", "minify-constant-folding", "transform-minify-booleans", "transform-merge-sibling-variables"],
+      "presets": ["react-optimize", ["env", {
+        "targets": {
+          "browsers": [">1%", "last 4 versions", "safari >= 9", "ie >= 9"],
+          "modules": false,
+          "useBuiltIns": true
+        }
+      }]]
+    }
   },
   "compileOnSave": false,
   "buildOnSave": false

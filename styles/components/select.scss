@@ -1,0 +1,8 @@
+@import '../utils/bem';
+
+@include block('select') {
+  display: inline-block;
+  height: 60px;
+  overflow: visible;
+  width: 250px;
+}

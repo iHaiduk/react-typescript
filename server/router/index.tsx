@@ -12,7 +12,7 @@ const initRoute = (app: Koa, route: Router) => {
             routing: {location},
         };
 
-        ctx.body = render(location, data);
+        ctx.body = render(ctx, location, data);
     });
 
     route.get("/test", (ctx) => {
@@ -22,7 +22,7 @@ const initRoute = (app: Koa, route: Router) => {
             routing: {location},
         };
 
-        ctx.body = render(location, data);
+        ctx.body = render(ctx, location, data);
     });
 
     app

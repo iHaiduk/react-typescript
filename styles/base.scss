@@ -1,7 +1,10 @@
-@import '~normalize-scss';
-@import 'variables/colors';
+@import '~bootstrap/scss/bootstrap-reboot';
+@import '~bootstrap/scss/print';
+@import 'variables/index';
 
-@include normalize();
+* {
+  box-sizing: border-box;
+}
 
 body {
   background: $background-color;

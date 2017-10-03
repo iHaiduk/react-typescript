@@ -1,56 +1,26 @@
 import {createBrowserHistory, History} from "history";
+import {Map} from "immutable";
+import {LOCATION_CHANGE} from "../constants";
 
-export const LOCATION_CHANGE = "router.LOCATION_CHANGE";
+export let history: History = process.env.BROWSER && createBrowserHistory();
 
-let Reducer: any;
-export let history: History;
-
-if (process.env.BROWSER) {
-
-    history = createBrowserHistory();
-
-    /**
-     * This is our custom change to work with React Router v4. The differences is
-     * that the reducer gets its initial state from history and the state shape
-     * is slightly different
-     */
-    const createReducer = (historyReducer: History) => {
-        const initState = {
-            action: historyReducer.action,
-            location: historyReducer.location,
-        };
-        return function reducer(state = initState, action: any) {
-            if (action.type === LOCATION_CHANGE) {
-                return {
-                    action: action.payload.action,
-                    location: action.payload.location,
-                };
-            }
-
-            return state;
-        };
-    };
-    Reducer = createReducer(history);
-}
-
-interface IRoute {
-    type: string;
+export interface IRoute {
+    type: typeof LOCATION_CHANGE;
     payload?: {
         location: string;
     };
     data?: any;
 }
 
-const route = (prevState = {location: "/"}, action: IRoute) => {
+const route = (state = Map({location: "/"}), action: IRoute) => {
     const {type, payload} = action;
+    state = state instanceof Map && state || Map(state);
 
-    return (() => {
-        switch (type) {
-            case LOCATION_CHANGE:
-                return {...prevState, location: payload.location};
-            default:
-                return prevState;
-        }
-    })();
+    switch (type) {
+        case LOCATION_CHANGE:
+            return state.set("location", payload.location);
+        default:
+            return state;
+    }
 };
 export default route;

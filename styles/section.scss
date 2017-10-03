@@ -1,4 +1,4 @@
-@import '~bemify';
+@import 'utils/bem';
 
 @include block('section') {
   display: block;

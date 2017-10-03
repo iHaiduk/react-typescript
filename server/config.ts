@@ -34,6 +34,12 @@ interface IConfig {
         port: number;
         host: string;
     } | string;
+    elastic: {
+        host: string
+        maxSockets: number;
+        sniffOnStart: boolean;
+        sniffInterval: number;
+    };
 }
 
 export const database = {
@@ -44,18 +50,26 @@ export const database = {
         server: { poolSize: 5, reconnectTries: Number.MAX_VALUE, reconnectInterval: 5000 },
         user: "",
     },
-    development: "mongodb://localhost/olympic",
-    production: "mongodb://localhost/olympic",
+    development: "mongodb://localhost/database",
+    production: "mongodb://localhost/database",
 };
 
 export const redisConfig = {
     family: 4,
-    host: "127.0.0.1",   // Redis host
+    host: "localhost",   // Redis host
     port: 6379,          // Redis port
+};
+
+export const elasticConfig = {
+    host: "https://x6jwb649fk:airn4dms7l@first-cluster-9518594759.eu-central-1.bonsaisearch.net",
+    maxSockets: 2,
+    sniffInterval: 60000,
+    sniffOnStart: true,
 };
 
 const config: IConfig = {
     database,
+    elastic: elasticConfig,
     hostname: "0.0.0.0",
     logLevel: "debug",
     logSafe: true,

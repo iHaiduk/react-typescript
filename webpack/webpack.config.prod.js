@@ -8,31 +8,16 @@ const BellOnBundlerErrorPlugin = require('bell-on-bundler-error-plugin');
 const OfflinePlugin = require('offline-plugin');
 const ManifestPlugin = require('webpack-manifest-plugin');
 const SpriteLoaderPlugin = require('svg-sprite-loader/plugin');
+const vendorStyles = require("./vendor.style").default;
+const vendorScripts = require("./vendor.scripts").default;
+const aliases = require("./webpack.frontend.aliases").default;
+
+const Hashids = require('hashids');
 
 const entry = process.env.TEMP_NAME ? {bundle: process.env.TEMP_NAME} : {
     bundle: './client/index.tsx',
-    vendor: [
-        'react',
-        'react-dom',
-        'react-helmet',
-        "react-redux",
-        'react-hot-loader',
-        'react-router',
-        'react-router-dom',
-        'react-router-redux',
-
-        'redux',
-        "redux-thunk",
-        "redux-promise-middleware",
-
-        "history",
-        'immutable',
-        'classnames',
-        "socket.io-client"
-    ],
-    style: [
-        './styles/index.ts',
-    ],
+    vendor: vendorScripts,
+    style: './styles/index.ts',
 };
 
 const excludes_offline = ['style/style.css*', 'style.css*'];
@@ -45,6 +30,7 @@ fs.readdirSync(resolve(__dirname, "..", "styles")).forEach(file => {
         excludes_offline.push(name + ".js*")
     }
 });
+entry['base'] = [entry['base'], ...vendorStyles];
 
 const plugins = [
     new webpack.LoaderOptionsPlugin({
@@ -141,27 +127,50 @@ module.exports = {
         extensions: [".ts", ".tsx", ".js", '.scss', '.css'],
         descriptionFiles: ['package.json'],
         moduleExtensions: ['-loader'],
-        alias: {
-            "_actions": resolve(__dirname, '..', 'store/actions/index.ts'),
-            "_blocks": resolve(__dirname, '..', 'view/block'),
-            "_config": resolve(__dirname, '..', 'server/config.ts'),
-            '_components': resolve(__dirname, '..', 'view/components'),
-            '_containers': resolve(__dirname, '..', 'view/containers'),
-            "_reducers": resolve(__dirname, '..', 'store/reducers/index.ts'),
-            "_route": resolve(__dirname, '..', 'route/index.tsx'),
-            "_store": resolve(__dirname, '..', 'store/index.ts'),
-            "_static": resolve(__dirname, '..', 'static'),
-            "_images": resolve(__dirname, '..', 'static/images'),
-            "_stylesLoad": resolve(__dirname, '..', 'styles'),
-            "_style": resolve(__dirname, '..', 'styles/index.ts'),
-            "_helpers": resolve(__dirname, '..', 'helpers')
-        }
+        alias: aliases,
     },
     plugins: plugins,
     module: {
         rules: [
             {
-                test: /\.scss$/,
+                test: /\.css$/,
+                use: ExtractTextPlugin.extract({
+                    fallback: "style-loader",
+                    use: [
+                        {
+                            loader: "css-loader", options: {
+                            sourceMap: false,
+                            modules: true,
+                            minimize: true,
+                            localIdentName: '[local]',
+                            importLoaders: 1,
+                        }
+                        },
+                        {
+                            loader: 'postcss-loader',
+                            options: {
+                                sourceMap: false,
+                                plugins: (loader) => [
+                                    require('autoprefixer')({
+                                        browsers: [
+                                            'last 2 versions',
+                                            '> 1%',
+                                            'android 4',
+                                            'iOS 9',
+                                        ],
+                                        cascade: false
+                                    }),
+                                    require('cssnano')({
+                                        preset: 'advanced',
+                                    })
+                                ]
+                            }
+                        },
+                    ]
+                })
+            },
+            {
+                test: /\.s[ac]ss$/,
                 use:
                     ExtractTextPlugin.extract({
                         fallback: "style-loader?sourceMap=false",
@@ -170,9 +179,14 @@ module.exports = {
                                 loader: "css-loader", options: {
                                 sourceMap: false,
                                 modules: true,
-                                importLoaders: 1,
+                                importLoaders: 3,
                                 minimize: true,
-                                localIdentName: '[hash:base64:6]'
+                                localIdentName: '[local]',
+                                getLocalIdent: (context, localIdentName, localName) => {
+                                    const hashids = new Hashids(localName);
+                                    const lngt = localName.length;
+                                    return hashids.encode(lngt, lngt, lngt).replace(/^\d/ig, "_" + hashids.encode(1));
+                                }
                             }
                             },
                             'group-css-media-queries-loader',
@@ -180,28 +194,24 @@ module.exports = {
                                 loader: 'postcss-loader',
                                 options: {
                                     sourceMap: false,
-                                    plugins: (loader) => [
-                                        require('autoprefixer')({
-                                            browsers: [
-                                                'last 2 versions',
-                                                '> 1%',
-                                                'android 4',
-                                                'iOS 9',
-                                            ],
-                                            cascade: false
-                                        }),
-                                        require('cssnano')({
-                                            preset: 'advanced',
-                                        })
-                                    ]
+                                    plugins: () => [require('autoprefixer')({
+                                        browsers: [
+                                            'last 2 versions',
+                                            '> 1%',
+                                            'android 4',
+                                            'iOS 9',
+                                        ],
+                                        cascade: false
+                                    })]
                                 }
                             },
                             {
                                 loader: "sass-loader", options: {
-                                    sourceMap: false,
-                                    modules: true,
-                                }
+                                sourceMap: false,
+                                // indentedSyntax: true,
+                                modules: true,
                             }
+                            },
                         ]
                     })
 
@@ -243,7 +253,7 @@ module.exports = {
                 exclude: /node_modules/,
                 include: [
                     resolve(__dirname, '..', 'client'),
-                    resolve(__dirname, '..', 'helpers'),
+                    resolve(__dirname, '..', 'utils'),
                     resolve(__dirname, '..', 'route'),
                     resolve(__dirname, '..', 'store'),
                     resolve(__dirname, '..', 'styles'),
