@@ -212,4 +212,4 @@ Folder Structure Compiled Files
     .
     └── dist
         ├── public               # Assets folder
-        └── dist                 # Server application
+        └── server               # Server application
